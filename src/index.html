@@ -13,7 +13,8 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,800,700|Vollkorn:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -33,29 +34,39 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <div class='main'>
-            <div class='pagetitle'>
-                <h1>CryptoLink</h1>
-                <h2>encrypt stuff into links</h2>
+        <div class='loading hidden'>
+            <div class='throbber'>
+                <i class='icon icon-beaker'></i>
+                <p>computing url ...</p>
             </div>
-            <div class='cryptostuff'>
-                <textarea class='textinput' id='content' rows='10' placeholder='Your text message or html content'></textarea>
-                <br />
-                <br />
-                <input class='textinput' type='text' id='password' placeholder='Password'></input>
-                <button class='button' id='submit'>Make Link</button>
-                <div class='progressbar'><div class='bar' style='width:20%'></div></div>
-                <div class='urlbox'>
-                    <em>URL:</em><a href='#' class='url'>http://cryptolink.org/#13faef39fe9fj332432jifesfef32h32023rr32r32r320r3jfihfislfh3902r0339r903ur93fehsfiesl390fj320fjeislfeji202jifejief02jef02fj20jffie2</a>
-                    <div class='status'>
-                        Length: <em>284</em> Encrypted: <em>No</em>
-                    </div>
+        </div>
+        <div class='primary'>
+            <div class='page main'>
+                <div class='pagetitle'>
+                    <h1>CryptoLink</h1>
+                    <h2>encrypt stuff into links</h2>
                 </div>
+                <div class='cryptostuff'>
+                    <textarea class='textinput' id='content' rows='10' placeholder='Your text message or html content'></textarea>
+                    <br />
+                    <input class='textinput' type='password' id='password' placeholder='Password'></input>
+                    <button class='button' id='submit'>Make Link</button>
+                    <div class='progressbar hidden'><div class='bar' style='width:20%'></div></div>
+                    <div class='urlbox hidden'>
+                        <em>URL:</em><a href='#' class='url'></a>
+                        <div class='status'>
+                            Length: <em class='js-url-length'>284</em> Encrypted: <em class='js-url-encrypted'>No</em>
+                        </div>
+                    </div>
 
+                </div>
             </div>
-            <div class='faq'>
-                <h3>FAQ</h3>
-                <h4>What is Krilink?</h4>
+        </div>
+        <div class='secondary'>
+            <div class='page faq'>
+                    <h3>FAQ</h3>
+                    <h4>What are Cryptolinks ?</h4>
+                    <p>Lorem Ipsum Sid amet</p>
             </div>
         </div>
     </body>

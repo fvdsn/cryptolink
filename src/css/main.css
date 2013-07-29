@@ -1,22 +1,29 @@
 html{
-    background: rgb(255, 230, 100);
-    font-family: 'Open Sans', sans-serif;
-    color: rgb(134, 79, 36);
+    position: relative;
+    background: rgb(68,68,68);
+    font-family: 'Source Sans Pro', sans-serif;
+    color: rgb(184,184,184);
 }
 h1,h2,h3,h4,h5{
-    font-family: 'Vollkorn';
+    font-family: 'Source Sans Pro';
 }
 h1{
     font-size: 54px;
-    font-weight: 400;
-    margin: 40px 0px -5px;
+    font-weight: 200;
+    margin: 60px 0px 0px;
 }
 h2{
-    font-size: 27px;
-    font-weight: 400;
-    margin: 0px 0px 40px;
+    font-size: 23px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    margin: 0px 0px 60px;
+    opacity: 0.6;
 }
-.main{
+.hidden{
+    display: none;
+}
+
+.page{
     overflow: none;
     width: 600px;
     margin: 0px auto;
@@ -28,37 +35,40 @@ h2{
     width: 100%;
 }
 .textinput{
-    background: rgb(255, 250, 210);
+    background: rgb(85,85,85);
     border-radius: 3px;
+    margin-bottom: 16px;
     border: none;
     padding: 16px;
+    font-size: 16px;
+    font-family: 'Source Sans Pro';
     box-sizing: border-box;
-    color: rgb(90, 68, 51);
-    box-shadow: 0px 1px 3px rgb(253, 170, 80);
+    color: rgb(180,180,180);
     -webkit-transition: all 150ms;
 }
 .textinput:focus{
     border: none;
     outline: none;
-    box-shadow: 0px 2px 0px rgb(255, 194, 39) inset, 0px 1px 3px rgb(255, 133, 0) inset;
+    background: rgb(95,95,95)
 }
 .textinput::-webkit-input-placeholder{
-    color: rgb(201, 149, 121);
+    color: rgb(150,150,150);
     font-style: italic;
 }
 .button{
-    background: rgb(49, 187, 132);
+    background: rgb(255, 130, 98);
     padding: 16px;
-    color: rgb(213, 255, 252);
-    font-weight: 900;
+    font-family: 'Source Sans Pro';
+    color: rgb(255, 255, 255);
+    font-weight: 600;
     cursor: pointer;
     border-radius: 3px;
     border: none;
     outline: none;
-    box-shadow: 0px 2px rgb(203, 255, 203), 0px 2px 3px rgba(156, 56, 0, 0.22);
+    text-shadow: 0px 1px 1px rgba(201, 0, 0, 0.53);
 }
 .textinput+.button{
-    margin-left: 16px;
+    margin-left: 14px;
 }
 .progressbar{
     background: rgb(49, 187, 132);
@@ -70,15 +80,19 @@ h2{
     background: rgb(232, 255, 255);
     border-radius: 3px;
 }
+.cryptostuff{
+    margin-bottom: 60px;
+}
 .urlbox{
     padding: 16px;
-    background: rgb(255, 130, 98);
+    background: rgb(58, 58, 58);
     text-overflow: ellipsis;
     overflow: hidden;
-    margin-top: 16px;
     border-radius: 3px;
-    color: white;
-    box-shadow: 0px 1px 3px rgba(175, 126, 0, 0.26);
+    color: rgb(219, 219, 219);
+}
+.urlbox .url{
+    white-space: nowrap;
 }
 .urlbox em{
     font-weight: 900;
@@ -95,4 +109,33 @@ h2{
 .status{
     text-align: center;
     margin-top: 8px;
+    opacity: 0.5;
+}
+.loading{
+    position: absolute;
+    top:0; left: 0; right: 0; bottom: 0;
+    user-select: none;
+    pointer-events: none;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    -webkit-animation: all linear 500ms;
+}
+.loading .throbber{
+    position: fixed;
+    width: 200px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+    margin-top: -50px;
+    text-align: center;
+}
+.loading .throbber .icon{
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+.secondary{
+    background: rgb(54,54,54);
+    padding: 60px 0px;
 }

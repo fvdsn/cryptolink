@@ -13,6 +13,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 
@@ -46,11 +47,20 @@
                     <h1>CryptoLink</h1>
                     <h2>encrypt stuff into links</h2>
                 </div>
+
                 <div class='cryptostuff'>
-                    <textarea class='textinput' id='content' rows='10' placeholder='Your text message or html content'></textarea>
+                    <div id='content-type'>
+                        <div class='radiobutton'>
+                            <span class='option first active'><i class='icon-font'></i></span>
+                            <span class='option'><i class='icon-code'></i></span>
+                            <span class='option last'><i class='icon-picture'></i></span>
+                        </div>
+                    </div>
+
+                    <textarea class='textinput fixed' id='content' rows='10' placeholder='Type your message here.'></textarea>
                     <br />
                     <input class='textinput' type='password' id='password' placeholder='Password'></input>
-                    <button class='button' id='submit'>Make Link</button>
+                    <button class='button disabled' id='submit'>Encrypt!</button>
                     <div class='progressbar hidden'><div class='bar' style='width:20%'></div></div>
                     <div class='urlbox hidden'>
                         <em>URL:</em><a href='#' class='url'></a>
@@ -58,15 +68,37 @@
                             Length: <em class='js-url-length'>284</em> Encrypted: <em class='js-url-encrypted'>No</em>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
         <div class='secondary'>
             <div class='page faq'>
-                    <h3>FAQ</h3>
-                    <h4>What are Cryptolinks ?</h4>
-                    <p>Lorem Ipsum Sid amet</p>
+                    <h3>What are Cryptolinks ?</h3>
+                    <p>
+                    In a sentence, a cryptolink is an URL or 'link' that contains encrypted data.
+                    </p><p>
+                    TODO: picture
+                    </p><p>
+                    Previously, if you wanted to encrypt and send an message, picture or program, 
+                    had to find and install an encryption software on your device, and ask all
+                    your recipients to do the same. And you may also had to find a service to host
+                    the encrypted file, which means you had to depend on the host to accept your 
+                    file and not remove it later on.
+                    </p><p>
+                    Cryptolink solves all these problems by allowing you to encrypt and decrypt 
+                    the messages in a web browser, which means it works natively with no setup on
+                    almost every device. And since the data is encrypted into an URL, you just need
+                    to send an URL to your recipients; no hosting service is required. 
+                    </p><p>
+                    And as sharing URLs is at the very basis of the web, there are countless practical
+                    ways to share your encrypted messages: email, IM, social networks, forums, QR-Codes,
+                    etc. 
+                    </p>
+                    <h3>How secure are they?</h3>
+                    <p>
+                    Very.
+                    </p>
             </div>
         </div>
     </body>

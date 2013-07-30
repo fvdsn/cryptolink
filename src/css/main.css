@@ -19,8 +19,16 @@ h2{
     margin: 0px 0px 60px;
     opacity: 0.6;
 }
+h3 {
+    font-weight: 300;
+    font-size: 36px;
+    margin: 0 0 8px;
+}
 .hidden{
     display: none;
+}
+.centered{
+    text-align: center;
 }
 
 .page{
@@ -49,14 +57,20 @@ h2{
 .textinput:focus{
     border: none;
     outline: none;
-    background: rgb(95,95,95)
+    background: rgb(95,95,95);
+    color: rgb(220,220,220);
 }
 .textinput::-webkit-input-placeholder{
     color: rgb(150,150,150);
     font-style: italic;
 }
+.textinput.fixed{
+    font-family: 'Inconsolata';
+}
 .button{
-    background: rgb(255, 130, 98);
+    position: relative;
+    top: 0px;
+    background: rgb(67, 168, 83);
     padding: 16px;
     font-family: 'Source Sans Pro';
     color: rgb(255, 255, 255);
@@ -65,8 +79,27 @@ h2{
     border-radius: 3px;
     border: none;
     outline: none;
-    text-shadow: 0px 1px 1px rgba(201, 0, 0, 0.53);
+    text-shadow: 0px 1px 1px rgba(8, 65, 5, 0.53);
+    user-select: none;
+    -webkit-transition: all 150ms linear;
 }
+.button:focus, .button:hover{
+    top: -2px;
+    box-shadow: 0px 2px rgb(51, 126, 63), 0px 2px 3px rgba(0, 0, 0, 0.22);
+}
+.button:active{
+    top: 0px;
+    box-shadow: none;
+    background: rgb(47, 148, 63);
+}
+.button.disabled{
+    top: 0px;
+    box-shadow: none;
+    cursor: default;
+    color: rgb(209, 209, 209);
+    background: rgb(85, 119, 90);
+}
+
 .textinput+.button{
     margin-left: 14px;
 }
@@ -139,3 +172,37 @@ h2{
     background: rgb(54,54,54);
     padding: 60px 0px;
 }
+/* ----- RADIO BUTTONS ----- */
+
+.radiobutton{
+    display: inline-block;
+    user-select: none;
+}
+.radiobutton > .option{
+    display: inline-block;
+    padding: 4px 6px;
+    background: rgb(85,85,85);
+    margin-right: -1px;
+    cursor: pointer;
+    user-select: none;
+}
+.radiobutton > .option.active{
+    background: rgb(45,45,45);
+}
+.radiobutton > .option.first{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.radiobutton > .option.last{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#content-type{
+    /*text-align: center;*/
+    margin-bottom: 16px;
+}
+
+
+
+

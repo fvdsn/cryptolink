@@ -1,5 +1,9 @@
 (function(){
 
+    window.cryptolink = {};
+
+    cryptolink.version = "1.0";
+
     function ask_for_password(pw_callback){
         $('html').html("<input type='text' placeholder='Password' id='password'></input><button id='decrypt'>Decrypt</button>");
         $('#decrypt').click(function(){
@@ -31,6 +35,16 @@
         }
     }
 
+    function decode_current_url(){
+        if(window.location.hash){
+            decode(window.location.hash.slice(1));
+        }else{
+            $('html').html("<h1>Error: nothing to decrypt</h1>");
+        }
+    }
+
+    cryptolink.decode_current_url = decode_current_url;
+
     function encode_url(content,password,success){
         LZMA.compress(content,5, function(result){
             result = new Uint8Array((new Int8Array(result)).buffer);
@@ -39,45 +53,10 @@
                 encoded = CryptoJS.AES.encrypt(encoded,password).toString();
                 encoded = '?' + encoded;
             }
-            success('/#'+encoded);
+            success('/'+cryptolink.version+'/#'+encoded);
         });
     }
 
-    function homepage(){
+    cryptolink.encode_url = encode_url;
 
-        $('#content').focus();
-        
-        $('#content').bind('input propertychange',function(){
-            if($(this).val()){
-                $('#submit').removeClass('disabled');
-            }else{
-                $('#submit').addClass('disabled');
-            }
-            $('.urlbox').addClass('hidden');
-        });
-
-        $('#submit').click(function(){
-            var content = $('#content').val();
-            var password = $('#password').val();
-            if(content){ 
-                $('.loading').removeClass('hidden');
-                setTimeout(function(){
-                    encode_url('<pre>'+content+'</pre>',password,function(result){
-                        var url = window.location.origin + result;
-                        $('.urlbox .url').attr('href',url).text(url);
-                        $('.urlbox .js-url-length').text(url.length);
-                        $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
-                        $('.urlbox').removeClass('hidden');
-                        $('.loading').addClass('hidden');
-                    });
-                },500);
-            }
-        });
-    }
-
-    if(window.location.hash){
-        decode(window.location.hash.slice(1));
-    }else{
-        $(function(){ homepage() });
-    }
 })();

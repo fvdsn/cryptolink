@@ -27,7 +27,9 @@
         <script src="js/vendor/enc-base64.js"></script>
         <script src="js/vendor/enc-utf16.js"></script>
         <script src="js/vendor/aes.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/cryptolink.js"></script>
+        <script src="js/gui.js"></script>
+        
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -45,15 +47,15 @@
             <div class='page main'>
                 <div class='pagetitle'>
                     <h1>CryptoLink</h1>
-                    <h2>encrypt stuff into links</h2>
+                    <h2>encrypt stuff the easy way</h2>
                 </div>
 
                 <div class='cryptostuff'>
                     <div id='content-type'>
                         <div class='radiobutton'>
-                            <span class='option first active'><i class='icon-font'></i></span>
-                            <span class='option'><i class='icon-code'></i></span>
-                            <span class='option last'><i class='icon-picture'></i></span>
+                            <span class='option first' data-type='text'><i class='icon-font'></i></span>
+                            <span class='option' data-type='html'><i class='icon-code'></i></span>
+                            <span class='option last' data-type='picture'><i class='icon-picture'></i></span>
                         </div>
                     </div>
 
@@ -76,28 +78,101 @@
             <div class='page faq'>
                     <h3>What are Cryptolinks ?</h3>
                     <p>
-                    In a sentence, a cryptolink is an URL or 'link' that contains encrypted data.
+                    In a word a cryptolink is an URL or 'link' that contains encrypted data.
                     </p><p>
                     TODO: picture
                     </p><p>
-                    Previously, if you wanted to encrypt and send an message, picture or program, 
-                    had to find and install an encryption software on your device, and ask all
+                    Previously, if you wanted to encrypt and send an message, picture or program, you
+                    had to find and install an encryption software on your device and ask all
                     your recipients to do the same. And you may also had to find a service to host
                     the encrypted file, which means you had to depend on the host to accept your 
                     file and not remove it later on.
                     </p><p>
-                    Cryptolink solves all these problems by allowing you to encrypt and decrypt 
-                    the messages in a web browser, which means it works natively with no setup on
-                    almost every device. And since the data is encrypted into an URL, you just need
-                    to send an URL to your recipients; no hosting service is required. 
+                    Cryptolink solves all these problems. First, cryptolinks can be encrypted and decrypted
+                    in a web browser, which means they work natively with no setup on
+                    almost every device. And since the data is encrypted into the cryptolink, you just need
+                    to send an URL to your recipients; no hosting service is required. If your recipient can
+                    see the link, he can use it.
                     </p><p>
                     And as sharing URLs is at the very basis of the web, there are countless practical
                     ways to share your encrypted messages: email, IM, social networks, forums, QR-Codes,
                     etc. 
                     </p>
-                    <h3>How secure are they?</h3>
+                    <h3>How secure are cryptolinks?</h3>
                     <p>
-                    Very.
+                    Cryptolinks are encrypted with AES, one of the most secure encryption algorithm available. But good
+                    encryption does not protect against easily guessable passwords. With the help of a computer, a hacker
+                    can guess millions of passwords a second. It is therefore very important for your chosen password to be
+                    hard to guess by following these tips:
+                    <ul>
+                        <li>Follow the indications given by the password input box: If it says it's useless or insecure, then pick another one !
+                            </li>
+                        <li>Make sure it is long enough, at least 15 characters.</li>
+                        <li>Mixing uppercase and lowercase characters, using numbers and special characters also improves the
+                        security, especially if you don't follow common patterns</li>
+                        <li>Common names and words are easy to remember but also easy to guess, and a long word is as easy to
+                        guess as a short one, so it is far better to use many short words than one long. A combination of four
+                        words and more should be secure</li>
+                        <li>But be aware that even long sentences taken from books, websites you visit, 
+                            or common english are also very easy to guess</li>
+                        <li>Don't use keyboard patterns</li>
+                        <li>Don't use a password you use on other services</li>
+                        <li><span id='gen_pwd' class='btn'>Generate A Secure Password</span> &nbsp; &nbsp; <pre id='rslt_pwd'></pre>
+                            <script>
+                                window.phonemes = [
+                                                'ba','bo','bu','bi','bou','boi','bon','bom','bai','bau','ban','bei','ben','be',
+                                                'ka','ko','ku','ki','kou','koi','kon','kom','kai','kau','kan','kei','ken','ke',
+                                                'da','do','du','di','dou','doi','don','dom','dai','dau','dan','dei','den','de',
+                                                'fa','fo','fu','fi','fou','foi','fon','fom','fai','fau','fan','fei','fen','fe',
+                                                'ga','go','gu','gi','gou','goi','gon','gom','gai','gau','gan','gei','gen','ge',
+                                                'ha','ho','hu','hi','hou','hoi','hon','hom','hai','hau','han','hei','hen','he',
+                                                'ja','jo','ju','ji','jou','joi','jon','jom','jai','jau','jan','jei','jen','je',
+                                                'la','lo','lu','li','lou','loi','lon','lom','lai','lau','lan','lei','len','le',
+                                                'ma','mo','mu','mi','mou','moi','mon','mom','mai','mau','man','mei','men','me',
+                                                'na','no','nu','ni','nou','noi','non','nom','nai','nau','nan','nei','nen','ne',
+                                                'pa','po','pu','pi','pou','poi','pon','pom','pai','pau','pan','pei','pen','pe',
+                                                'ra','ro','ru','ri','rou','roi','ron','rom','rai','rau','ran','rei','ren','re',
+                                                'sa','so','su','si','sou','soi','son','som','sai','sau','san','sei','sen','se',
+                                                'ta','to','tu','ti','tou','toi','ton','tom','tai','tau','tan','tei','ten','te',
+                                                'va','vo','vu','vi','vou','voi','von','vom','vai','vau','van','vei','ven','ve',
+                                                'wa','wo','wu','wi','wou','woi','won','wom','wai','wau','wan','wei','wen','we',
+                                                'xa','xo','xu','xi','xou','xoi','xon','xom','xai','xau','xan','xei','xen','xe',
+                                                'za','zo','zu','zi','zou','zoi','zon','zom','zai','zau','zan','zei','zen','ze',
+                                                'tta','tto','ttu','tti','tte'];
+                                console.log(phonemes.length);
+                                $('#gen_pwd').click(function(){
+                                    var pwd = '';
+                                    var wsp = 0;
+                                    for(var i = 0; i < 12; i++){
+                                        var r = Math.floor(Math.random()*phonemes.length);
+                                        pwd += phonemes[r];
+                                        if(i !== 0 && i !== 9 && pwd[pwd.length-1] !== ' ' && pwd[pwd.length-1] !== '-' && wsp <= 5){
+                                            if(Math.random() < 0.4){
+                                                pwd += ' ';
+                                                wsp++;
+                                            }
+                                        }
+                                    }
+                                    console.log(pwd);
+                                    $('#rslt_pwd').text(pwd);
+                                });
+                            </script>
+                        </li>
+                    </ul>
+                    </p>
+                    <h3>How much data can I put in a cryptolink?</h3>
+                    <p>
+                    Not too much.
+                    </p>
+                    <h3>What if cryptolink.org is taken down ?</h3>
+                    <p>Since cryptolink.org doesn't host, view, log or access any encrypted data or user information and since
+                    it has no database or dynamic content and is hosted on a <a href='http://github.com'>very reliable service</a>, 
+                    there is little reason for it to ever break or be taken down.
+                    </p><p>
+                    But in the case it happens, there are several ways to go around that. First cryptolink is free software,
+                    which means you can put up mirrors and change the host in the cryptolink to point to another location. I am also
+                    in the process of developping an installable applications that will allow you to create and decrypt cryptolinks
+                    without access to this website or any internet connection at all.
                     </p>
             </div>
         </div>

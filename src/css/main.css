@@ -27,6 +27,13 @@ h3 {
 .hidden{
     display: none;
 }
+.btn{
+    background: rgb(184,184,184);
+    border-radius: 3px;
+    cursor: pointer;
+    color: rgb(68,68,68);
+    padding: 2px 4px;
+}
 .centered{
     text-align: center;
 }
@@ -35,6 +42,10 @@ h3 {
     overflow: none;
     width: 600px;
     margin: 0px auto;
+    
+}
+.page p{
+    text-align: justify;
 }
 .pagetitle{
     text-align: center;

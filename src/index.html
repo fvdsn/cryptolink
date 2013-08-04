@@ -27,6 +27,8 @@
         <script src="js/vendor/enc-base64.js"></script>
         <script src="js/vendor/enc-utf16.js"></script>
         <script src="js/vendor/aes.js"></script>
+        <script src="js/vendor/ace/ace.js"></script>
+        <script src="js/vendor/zxcvbn-async.js"></script>
         <script src="js/cryptolink.js"></script>
         <script src="js/gui.js"></script>
         
@@ -40,7 +42,7 @@
         <div class='loading hidden'>
             <div class='throbber'>
                 <i class='icon icon-beaker'></i>
-                <p>computing url ...</p>
+                <p>encrypting document ...</p>
             </div>
         </div>
         <div class='primary'>
@@ -55,15 +57,30 @@
                         <div class='radiobutton'>
                             <span class='option first' data-type='text'><i class='icon-font'></i></span>
                             <span class='option' data-type='html'><i class='icon-code'></i></span>
-                            <span class='option last' data-type='picture'><i class='icon-picture'></i></span>
+                            <span class='option last' data-type='img'><i class='icon-picture'></i></span>
                         </div>
                     </div>
 
-                    <textarea class='textinput fixed' id='content' rows='10' placeholder='Type your message here.'></textarea>
-                    <br />
-                    <input class='textinput' type='password' id='password' placeholder='Password'></input>
+                    <textarea class='textinput fixed' id='editor-text' rows='10' placeholder='Message'></textarea>
+
+                    <span></span>
+                    <div class='textinput fixed hidden' id='editor-html'></div>
+
+                    <div class='imageuploader hidden' id='editor-img'>
+                        <div class='userimages'></div>
+                        <div class='dropinvite'>
+                            <i class='icon-picture'></i>
+                            <p>Choose a Picture</p>
+                        </div>
+                        <div id='img-error' class='textinput invalid hidden'>Error</div>
+                        <input type='file' id='img-selector'></input>
+                    </div>
+
+                    <input id='password' class='textinput' type='password' placeholder='Password'></input>
+                    <span id='security' class='textinput width-medium invalid glueleft hidden'></span>
+
                     <button class='button disabled' id='submit'>Encrypt!</button>
-                    <div class='progressbar hidden'><div class='bar' style='width:20%'></div></div>
+
                     <div class='urlbox hidden'>
                         <em>URL:</em><a href='#' class='url'></a>
                         <div class='status'>

@@ -249,6 +249,20 @@ $(function(){
     $('#content-type .option').click(function(){
         set_editor($(this).data('type'));
     });
+    $('#content-type .option').hover(function(){
+            var type = $(this).data('type');
+            var label = $('#content-type .label');
+            if(type === 'text'){
+                label.text('Encrypt a Text Message');
+            }else if(type === 'html'){
+                label.text('Encrypt an HTML Web Page');
+            }else if(type === 'img'){
+                label.text('Encrypt a Picture');
+            }
+            label.removeClass('invisible');
+        },function(){
+            $('#content-type .label').addClass('invisible');
+        });
     
     function display_security(security,score){
         var s = $('#security');

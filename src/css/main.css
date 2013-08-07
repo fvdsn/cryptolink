@@ -30,6 +30,10 @@ h3 {
 .hidden{
     display: none !important;
 }
+.invisible{
+    opacity: 0 !important;
+    -webkit-transition: opacity 150ms linear;
+}
 .centered{
     text-align: center;
 }
@@ -319,29 +323,7 @@ h3 {
     margin-bottom: 16px;
 }
 /* ----- LABELS ----- */
-
-.label{
-    width: 180px;
-    display: block;
-    visibility: hidden;
-    opacity: 0;
-    text-align: center;
-    color: white;
-    background: rgb(43, 43, 43);
-    border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    top: -39px;
-    line-height: 32px;
-    margin-left: -90px;
-    user-select: none;
-    -webkit-transition: all 150ms linear;
+.label {
+    margin-left: 10px;
+    opacity: 0.5;
 }
-.option:hover .label, .label:hover{
-    visibility: visible;
-    opacity: 1;
-}
-
-
-
-

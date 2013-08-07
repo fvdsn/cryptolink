@@ -101,105 +101,49 @@
             </div>
         </div>
         <div class='secondary'>
+            <nav class='page links'>
+                <a href='http://frederic.vanderessen.com'><i class='icon-rss'></i> Blog</a>
+                <a href='http://twitter.com/fvdsn'><i class='icon-twitter-sign'></i> Twitter</a>
+                <a href='http://github.com/cryptolink'><i class='icon-github-sign'></i> GitHub</a>
+                <a href='#contribute'><i class='icon-thumbs-up'></i> Contribute</a>
+            </nav>
             <div class='page faq'>
-                    <h3>What are Cryptolinks ?</h3>
-                    <p>
-                    In a word a cryptolink is an URL or 'link' that contains encrypted data.
+                    <h3>What is CryptoLink ?</h3>
+                    <p>CryptoLink is a open source web application that allows you to easily encrypt 
+                    and share text messages, websites and pictures with a high level of security 
+                    and privacy. 
                     </p><p>
-                    TODO: picture
+                    More specifically, CryptoLink encrypts the data into a link (or URL). 
+                    All you have to do to decrypt your data is to follow the link and provide your
+                    password. There is nothing to install, and it works on almost every device.
                     </p><p>
-                    Previously, if you wanted to encrypt and send an message, picture or program, you
-                    had to find and install an encryption software on your device and ask all
-                    your recipients to do the same. And you may also had to find a service to host
-                    the encrypted file, which means you had to depend on the host to accept your 
-                    file and not remove it later on.
-                    </p><p>
-                    Cryptolink solves all these problems. First, cryptolinks can be encrypted and decrypted
-                    in a web browser, which means they work natively with no setup on
-                    almost every device. And since the data is encrypted into the cryptolink, you just need
-                    to send an URL to your recipients; no hosting service is required. If your recipient can
-                    see the link, he can use it.
-                    </p><p>
-                    And as sharing URLs is at the very basis of the web, there are countless practical
-                    ways to share your encrypted messages: email, IM, social networks, forums, QR-Codes,
-                    etc. 
-                    </p>
+                    Cryptolink doesn't know anything about your message. It doesn't host it, it 
+                    doesn't know you encrypted it and neither does it know when or if you decrypt it. 
+                    This means we can let you do whatever you want with CryptoLink and you can rest
+                    assured that as long as you have the link, you have your data.
                     <h3>How secure are cryptolinks?</h3>
                     <p>
-                    Cryptolinks are encrypted with AES, one of the most secure encryption algorithm available. But good
-                    encryption does not protect against easily guessable passwords. With the help of a computer, a hacker
-                    can guess millions of passwords a second. It is therefore very important for your chosen password to be
-                    hard to guess by following these tips:
-                    <ul>
-                        <li>Follow the indications given by the password input box: If it says it's useless or insecure, then pick another one !
-                            </li>
-                        <li>Make sure it is long enough, at least 15 characters.</li>
-                        <li>Mixing uppercase and lowercase characters, using numbers and special characters also improves the
-                        security, especially if you don't follow common patterns</li>
-                        <li>Common names and words are easy to remember but also easy to guess, and a long word is as easy to
-                        guess as a short one, so it is far better to use many short words than one long. A combination of four
-                        words and more should be secure</li>
-                        <li>But be aware that even long sentences taken from books, websites you visit, 
-                            or common english are also very easy to guess</li>
-                        <li>Don't use keyboard patterns</li>
-                        <li>Don't use a password you use on other services</li>
-                        <li><span id='gen_pwd' class='btn'>Generate A Secure Password</span> &nbsp; &nbsp; <pre id='rslt_pwd'></pre>
-                            <script>
-                                window.phonemes = [
-                                                'ba','bo','bu','bi','bou','boi','bon','bom','bai','bau','ban','bei','ben','be',
-                                                'ka','ko','ku','ki','kou','koi','kon','kom','kai','kau','kan','kei','ken','ke',
-                                                'da','do','du','di','dou','doi','don','dom','dai','dau','dan','dei','den','de',
-                                                'fa','fo','fu','fi','fou','foi','fon','fom','fai','fau','fan','fei','fen','fe',
-                                                'ga','go','gu','gi','gou','goi','gon','gom','gai','gau','gan','gei','gen','ge',
-                                                'ha','ho','hu','hi','hou','hoi','hon','hom','hai','hau','han','hei','hen','he',
-                                                'ja','jo','ju','ji','jou','joi','jon','jom','jai','jau','jan','jei','jen','je',
-                                                'la','lo','lu','li','lou','loi','lon','lom','lai','lau','lan','lei','len','le',
-                                                'ma','mo','mu','mi','mou','moi','mon','mom','mai','mau','man','mei','men','me',
-                                                'na','no','nu','ni','nou','noi','non','nom','nai','nau','nan','nei','nen','ne',
-                                                'pa','po','pu','pi','pou','poi','pon','pom','pai','pau','pan','pei','pen','pe',
-                                                'ra','ro','ru','ri','rou','roi','ron','rom','rai','rau','ran','rei','ren','re',
-                                                'sa','so','su','si','sou','soi','son','som','sai','sau','san','sei','sen','se',
-                                                'ta','to','tu','ti','tou','toi','ton','tom','tai','tau','tan','tei','ten','te',
-                                                'va','vo','vu','vi','vou','voi','von','vom','vai','vau','van','vei','ven','ve',
-                                                'wa','wo','wu','wi','wou','woi','won','wom','wai','wau','wan','wei','wen','we',
-                                                'xa','xo','xu','xi','xou','xoi','xon','xom','xai','xau','xan','xei','xen','xe',
-                                                'za','zo','zu','zi','zou','zoi','zon','zom','zai','zau','zan','zei','zen','ze',
-                                                'tta','tto','ttu','tti','tte'];
-                                console.log(phonemes.length);
-                                $('#gen_pwd').click(function(){
-                                    var pwd = '';
-                                    var wsp = 0;
-                                    for(var i = 0; i < 12; i++){
-                                        var r = Math.floor(Math.random()*phonemes.length);
-                                        pwd += phonemes[r];
-                                        if(i !== 0 && i !== 9 && pwd[pwd.length-1] !== ' ' && pwd[pwd.length-1] !== '-' && wsp <= 5){
-                                            if(Math.random() < 0.4){
-                                                pwd += ' ';
-                                                wsp++;
-                                            }
-                                        }
-                                    }
-                                    console.log(pwd);
-                                    $('#rslt_pwd').text(pwd);
-                                });
-                            </script>
-                        </li>
-                    </ul>
-                    </p>
-                    <h3>How much data can I put in a cryptolink?</h3>
-                    <p>
-                    Not too much.
-                    </p>
-                    <h3>What if cryptolink.org is taken down ?</h3>
-                    <p>Since cryptolink.org doesn't host, view, log or access any encrypted data or user information and since
-                    it has no database or dynamic content and is hosted on a <a href='http://github.com'>very reliable service</a>, 
-                    there is little reason for it to ever break or be taken down.
+                    First, keep in mind that CryptoLink is beta software with all the usual warnings it implies. 
                     </p><p>
-                    But in the case it happens, there are several ways to go around that. First cryptolink is free software,
-                    which means you can put up mirrors and change the host in the cryptolink to point to another location. I am also
-                    in the process of developping an installable applications that will allow you to create and decrypt cryptolinks
-                    without access to this website or any internet connection at all.
+                    Cryptolinks are encrypted with AES, one of the most secure encryption algorithm available. But good
+                    encryption does not protect against easily guessable passwords; with the help of a supercomputer, a 
+                    hacker can guess millions of passwords a second. It is 
+                    therefore important for you to choose a good password. For this CryptoLink incorporates a very powerful 
+                    password strength checker that gives solid advice. that you should follow. 
+                    </p><p>
+                    <h3>How much data can I put in a cryptolink?</h3>
+                    <p>Most browsers allows you to put several megabytes of data inside a link, and that
+                    is enough for a lot of applications. The current bottleneck is the speed of the 
+                    compression algorithm, where there is much room for improvement. 
+                    </p><p>
+                    There is unfortunately much less room inside a QR-Code.
                     </p>
+                    <h3>Contributions</h3>
+                    <p>TODO: Paypal</p>
+                    <p>TODO: Bitcoin</p>
+            </div>
+            <div class='page footer'>
+                MIT Licensed by <a href='http://frederic.vanderessen.com'>Frédéric van der Essen</a>
             </div>
         </div>
     </body>

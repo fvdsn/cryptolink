@@ -7,6 +7,7 @@ html{
     font-family: 'Source Sans Pro', sans-serif;
     color: rgb(184,184,184);
 }
+
 h1,h2,h3,h4,h5{
     font-family: 'Source Sans Pro';
 }
@@ -25,7 +26,13 @@ h2{
 h3 {
     font-weight: 300;
     font-size: 36px;
-    margin: 0 0 8px;
+    margin: 30px 0 -5px;
+}
+a {
+    color: inherit;
+}
+.secondary p {
+    color: rgb(150,150,150);
 }
 .hidden{
     display: none !important;
@@ -50,7 +57,22 @@ h3 {
 .pagetitle{
     text-align: center;
 }
-
+/* ----- Outside Links ----- */
+.links,.footer {
+    text-align: center;
+    color: rgb(83, 83, 83);
+}
+.links a {
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+.footer {
+    margin-top: 60px;
+    
+}
 /* ----- Text Inputs ----- */
 
 .textinput{

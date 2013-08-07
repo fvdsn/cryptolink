@@ -4,8 +4,35 @@
 
     cryptolink.version = "1.0";
 
+    var password_template = [
+        "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>",
+        "<link rel='stylesheet' href='../css/main.css'>",
+        "<style>",
+            "html{ position: static; }",
+            ".pwbox{ width: 350px; height: 200px; position: absolute;",
+                    "top: 50%; left: 50%; margin-top:-100px; margin-left:-175px;}",
+            ".pwbox h3{ font-size: 30px; margin: 30px 0px 8px; font-weight: 300; }",
+            ".bottomlink{ width: 350px; text-align: center; position: absolute; bottom: 0px;",
+                    "left: 50%; margin-left:-175px; margin-bottom: 8px; text-decoration: none; color: rgb(120,120,120); }",
+            
+        "</style>",
+        "<div class='pwbox'>",
+            "<h3>Encrypted Document</h3>",
+            "<input type='password' placeholder='Password' id='password' class='textinput'></input>",
+            "<button id='decrypt' class='button disabled'>Decrypt</button>",
+        "</div>",
+        "<a class='bottomlink' href='/'>Encrypted with CryptoLink</a>",
+    ].join('\n');
+
+    console.log(password_template);
+
     function ask_for_password(pw_callback){
-        $('html').html("<input type='text' placeholder='Password' id='password'></input><button id='decrypt'>Decrypt</button>");
+        //$('html').html("<input type='text' placeholder='Password' id='password'></input><button id='decrypt'>Decrypt</button>");
+        $('html').html(password_template);
+        $('#password').bind('change input propertychange',function(){
+            $('#decrypt').toggleClass('disabled',!$(this).val());
+        });
+
         $('#decrypt').click(function(){
             var pw = $('#password').val();
             if(pw){

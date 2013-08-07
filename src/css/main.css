@@ -211,6 +211,7 @@ a {
     background: rgb(67, 168, 83);
     padding: 16px;
     font-family: 'Source Sans Pro';
+    font-size: inherit;
     color: rgb(255, 255, 255);
     font-weight: 600;
     cursor: pointer;

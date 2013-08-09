@@ -24,10 +24,8 @@
         "<a class='bottomlink' href='/'>Encrypted with CryptoLink</a>",
     ].join('\n');
 
-    console.log(password_template);
 
     function ask_for_password(pw_callback){
-        //$('html').html("<input type='text' placeholder='Password' id='password'></input><button id='decrypt'>Decrypt</button>");
         $('html').html(password_template);
         $('#password').bind('change input propertychange',function(){
             $('#decrypt').toggleClass('disabled',!$(this).val());

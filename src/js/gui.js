@@ -150,7 +150,6 @@ $(function(){
                     * this.editor.renderer.lineHeight 
                     + this.editor.renderer.scrollBar.getWidth();
         height = Math.max(height,190);
-        console.log('height:',height);
         this.$el.height(height.toString() + 'px');
         this.editor.resize();
     };
@@ -217,7 +216,6 @@ $(function(){
         this.hide_error();
         if(!file.type.match(/image.*/)){
             self.show_error('Unsupported File Format');
-            console.log('Not an image!');
             return;
         }
 
@@ -258,7 +256,6 @@ $(function(){
     var editor = editors.text;
 
     function set_editor(type){
-        console.log('type:',type, editors);
         if(editors[type] && editor.type !== type){
             editor.hide();
             if(editor.datatype === editors[type].datatype){
@@ -322,7 +319,6 @@ $(function(){
                 display_security('none');
             }else{
                 var security = zxcvbn(pw.val(),['horsebatterystaple']);
-                console.log('entropy:',security.entropy);
                 if(security.entropy <= 64){
                     display_security('insecure',security.entropy/64.0);
                 }else{
@@ -337,7 +333,6 @@ $(function(){
 
     $('#submit').click(function(){
         var content = editor.get_encoded_content();
-        console.log(content);
         var password = $('#password').val();
         if(content){ 
             $('.loading').removeClass('hidden');

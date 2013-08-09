@@ -6,6 +6,7 @@ $(function(){
         var  self = this;
         this.el   = $el.get(0);
         this.$el  = $(this.el);
+        this.linewidth = 71;
         this.onupdate = onupdate;
         this.$el.bind('input propertychange',function(){ 
             self.update(); 
@@ -61,6 +62,32 @@ $(function(){
             }
             return out;
         }
+        function linebreak(width,tokens){
+            var out = [];
+            var currlen = 0;
+            var linebreak = false;
+            for(var i = 0, len = tokens.length; i < len; i++){
+                var token = tokens[i];
+                var tokenlen = token === '\t' ? 4 : token.length;
+
+                if(token === '\n'){
+                    out.push('\n');
+                    currlen = 0;
+                }else if(currlen && currlen + tokenlen > width){
+                    out.push('\n');
+                    if(token === ' '){
+                        currlen = 0;
+                    }else{
+                        out.push(token);
+                        currlen = tokenlen;
+                    }
+                }else{
+                    currlen += tokens[i].length;
+                    out.push(tokens[i]);
+                }
+            }
+            return out;
+        }
         var entity_map = { 
             "&": "&amp;",
             "<": "&lt;",
@@ -76,7 +103,7 @@ $(function(){
         var content = this.$el.val();
         var out = [];
         
-        content = split(split(split(content,'\n'),'\t'),' ');
+        content = linebreak(this.linewidth,split(split(split(content,'\n'),'\t'),' '));
         
         var urlrgxp = /(^(http|https|ftp|file|)\:\/\/|^(mailto\:|magnet\:))/;
 

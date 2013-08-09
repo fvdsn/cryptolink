@@ -283,6 +283,17 @@ a {
     opacity: 0.5;
 }
 
+/* ------ QR CODE ------ */
+
+#qrcode{
+    background: white;
+    padding: 16px;
+}
+#qrcode img{
+    width: 100%;
+    image-rendering: -webkit-optimize-contrast;
+}
+
 /* ------ LOADING SCREEN ------ */
 
 .loading{

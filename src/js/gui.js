@@ -322,6 +322,14 @@ $(function(){
                     $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
                     $('.urlbox').removeClass('hidden');
                     $('.loading').addClass('hidden');
+                    if(url.length <= 4296){
+                        $('#qrcode').empty();
+                        new QRCode($('#qrcode')[0],{
+                            'text': url,
+                            'width': 568,
+                            'height': 568,
+                        });
+                    }
                 });
             },500);
         }

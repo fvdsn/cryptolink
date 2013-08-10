@@ -6,7 +6,7 @@
 
     var header_template = [
         "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>",
-        "<link rel='stylesheet' href='../css/main.css'>",
+        "<link rel='stylesheet' href='/css/main.css'>",
         "<style>",
             "html{ position: static; }",
             ".centerbox{ width: 350px; height: 200px; position: absolute;",
@@ -15,6 +15,7 @@
             ".centerbox.dark { padding: 0px 32px; box-sizing: border-box; border-radius: 3px; background: rgba(0, 0, 0, 0.11); }",
             ".bottomlink{ width: 350px; text-align: center; position: absolute; bottom: 0px;",
                     "left: 50%; margin-left:-175px; margin-bottom: 8px; text-decoration: none; color: rgb(120,120,120); }",
+            "#errorbox{ width: 334px; text-align: center; }",
             
         "</style>",
         "",
@@ -25,14 +26,23 @@
             "<h3>Encrypted Document</h3>",
             "<input type='password' placeholder='Password' id='password' class='textinput'></input>",
             "<button id='decrypt' class='button disabled'>Decrypt</button>",
+            "<div id='errorbox' class='textinput invalid hidden'>Wrong Password or Damaged URL</div>",
         "</div>",
         "<a class='bottomlink' href='/'>Encrypted with CryptoLink</a>",
     ].join('\n');
 
     var empty_template = header_template + [
         "<div class='centerbox dark'>",
-            "<h3>CryptoLink 1.0</h3>",
+            "<h3>CryptoLink "+cryptolink.version+"</h3>",
             "<p>ERROR: Nothing to decrypt</p>",
+            "<p><a href='/'>Create a Cryptolink?</a></p>",
+        "</div>",
+    ].join('\n');
+
+    var error_template = header_template + [
+        "<div class='centerbox dark'>",
+            "<h3>CryptoLink 1.0</h3>",
+            "<p>ERROR: Could not decode URL.</p>",
             "<p><a href='/'>Create a Cryptolink?</a></p>",
         "</div>",
     ].join('\n');
@@ -46,6 +56,7 @@
         });
 
         $('#decrypt').click(function(){
+            $('#errobox').addClass('hidden');
             var pw = $('#password').val();
             if(pw){
                 pw_callback(pw);
@@ -69,9 +80,24 @@
             window.stop();
 
             ask_for_password(function(password){
-                doc = CryptoJS.AES.decrypt(doc,password).toString(CryptoJS.enc.Utf8);
-                doc = LZString.decompressFromBase64(doc);
-                $('html').html(doc);
+                try{
+                    doc = CryptoJS.AES.decrypt(doc,password).toString(CryptoJS.enc.Utf8);
+                    doc = LZString.decompressFromBase64(doc);
+                }catch(e){
+                    $('#errorbox').removeClass('hidden');
+                    setTimeout(function(){
+                        location.reload();
+                    },1000);
+                    return;
+                }
+                if(!doc){
+                    $('#errorbox').removeClass('hidden');
+                    setTimeout(function(){
+                        location.reload();
+                    },1000);
+                }else{
+                    $('html').html(doc);
+                }
             });
 
         }else{
@@ -84,8 +110,17 @@
         if(doc){
             $('html').html('');
             window.stop();
-            doc = LZString.decompressFromBase64(doc);
-            $('html').html(doc);
+            try{
+                doc = LZString.decompressFromBase64(doc);
+            }catch(e){
+                $('html').html(error_template);
+                return;
+            }
+            if(!doc){
+                $('html').html(error_template);
+            }else{
+                $('html').html(doc);
+            }
         }else{
             $('html').html(empty_template);
         }

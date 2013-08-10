@@ -336,7 +336,7 @@ $(function(){
         var password = $('#password').val();
 
         function on_encoding_success(url){
-            $('.urlbox .url').attr('href',url).text(url);
+            $('.urlbox .url').attr('href',url).text(url.slice(0,1024));
             $('.urlbox .js-url-length').text(url.length);
             $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
             $('.urlbox').removeClass('hidden');

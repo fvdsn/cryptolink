@@ -70,10 +70,8 @@
 
             ask_for_password(function(password){
                 doc = CryptoJS.AES.decrypt(doc,password).toString(CryptoJS.enc.Utf8);
-                doc = new Int8Array(Base64Binary.decode(doc).buffer);
-                LZMA.decompress(doc, function(result){
-                    $('html').html(result);
-                });
+                doc = LZString.decompressFromBase64(doc);
+                $('html').html(doc);
             });
 
         }else{
@@ -86,11 +84,8 @@
         if(doc){
             $('html').html('');
             window.stop();
-            
-            doc = new Int8Array(Base64Binary.decode(doc).buffer);
-            LZMA.decompress(doc, function(result){
-                $('html').html(result);
-            });
+            doc = LZString.decompressFromBase64(doc);
+            $('html').html(doc);
         }else{
             $('html').html(empty_template);
         }
@@ -98,20 +93,14 @@
 
 
     cryptolink.encode_encrypted_url = function(host_url,content,password,success){
-        LZMA.compress(content,5, function(result){
-            result = new Uint8Array((new Int8Array(result)).buffer);
-            var encoded = base64ArrayBuffer(result);
-            encoded = CryptoJS.AES.encrypt(encoded,password).toString();
-            success(host_url+'/'+cryptolink.version+'/#'+encoded);
-        });
+        var encoded = LZString.compressToBase64(content);
+        encoded = CryptoJS.AES.encrypt(encoded,password).toString();
+        success(host_url+'/'+cryptolink.version+'/#'+encoded);
     };
 
     cryptolink.encode_public_url = function(host_url,content,success){
-        LZMA.compress(content,5, function(result){
-            result = new Uint8Array((new Int8Array(result)).buffer);
-            var encoded = base64ArrayBuffer(result);
-            success(host_url+'/'+cryptolink.version+'/public/#'+encoded);
-        });
+        var encoded = LZString.compressToBase64(content);
+        success(host_url+'/'+cryptolink.version+'/public/#'+encoded);
     };
 
 })();

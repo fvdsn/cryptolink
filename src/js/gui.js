@@ -334,25 +334,31 @@ $(function(){
     $('#submit').click(function(){
         var content = editor.get_encoded_content();
         var password = $('#password').val();
+
+        function on_encoding_success(url){
+            $('.urlbox .url').attr('href',url).text(url);
+            $('.urlbox .js-url-length').text(url.length);
+            $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
+            $('.urlbox').removeClass('hidden');
+            $('.loading').addClass('hidden');
+            if(url.length <= 4296){
+                $('#qrcode').empty();
+                new QRCode($('#qrcode')[0],{
+                    'text': url,
+                    'width': 568,
+                    'height': 568,
+                });
+            }
+        }
+
         if(content){ 
             $('.loading').removeClass('hidden');
             setTimeout(function(){
-                cryptolink.encode_url(content,password,function(result){
-                    var url = window.location.origin + result;
-                    $('.urlbox .url').attr('href',url).text(url);
-                    $('.urlbox .js-url-length').text(url.length);
-                    $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
-                    $('.urlbox').removeClass('hidden');
-                    $('.loading').addClass('hidden');
-                    if(url.length <= 4296){
-                        $('#qrcode').empty();
-                        new QRCode($('#qrcode')[0],{
-                            'text': url,
-                            'width': 568,
-                            'height': 568,
-                        });
-                    }
-                });
+                if(password){
+                    cryptolink.encode_encrypted_url(window.location.origin,content,password,on_encoding_success);
+                }else{
+                    cryptolink.encode_public_url(window.location.origin,content,on_encoding_success);
+                }
             },500);
         }
     });

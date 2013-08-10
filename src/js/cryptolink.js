@@ -53,49 +53,65 @@
         });
     }
 
-    function decode(doc){
-        $('html').html('');
-        window.stop();
+    function get_url_hash(url){
+        var i = url.indexOf('#');
+        if(i > 0){ 
+            return url.slice(i + 1);
+        }else{
+            return '';
+        }
+    }
 
-        if(doc[0] === '?'){
+    cryptolink.decode_encrypted_url = function(url){
+        var doc = get_url_hash(url);
+        if(doc){
+            $('html').html('');
+            window.stop();
+
             ask_for_password(function(password){
-                doc = doc.slice(1);
                 doc = CryptoJS.AES.decrypt(doc,password).toString(CryptoJS.enc.Utf8);
                 doc = new Int8Array(Base64Binary.decode(doc).buffer);
                 LZMA.decompress(doc, function(result){
                     $('html').html(result);
                 });
             });
+
         }else{
+            $('html').html(empty_template);
+        }
+    };
+
+    cryptolink.decode_public_url = function(url){
+        var doc = get_url_hash(url);
+        if(doc){
+            $('html').html('');
+            window.stop();
+            
             doc = new Int8Array(Base64Binary.decode(doc).buffer);
             LZMA.decompress(doc, function(result){
                 $('html').html(result);
             });
-        }
-    }
-
-    function decode_current_url(){
-        if(window.location.hash){
-            decode(window.location.hash.slice(1));
         }else{
             $('html').html(empty_template);
         }
-    }
+    };
 
-    cryptolink.decode_current_url = decode_current_url;
 
-    function encode_url(content,password,success){
+    cryptolink.encode_encrypted_url = function(host_url,content,password,success){
         LZMA.compress(content,5, function(result){
             result = new Uint8Array((new Int8Array(result)).buffer);
             var encoded = base64ArrayBuffer(result);
-            if(password){
-                encoded = CryptoJS.AES.encrypt(encoded,password).toString();
-                encoded = '?' + encoded;
-            }
-            success('/'+cryptolink.version+'/#'+encoded);
+            encoded = CryptoJS.AES.encrypt(encoded,password).toString();
+            success(host_url+'/'+cryptolink.version+'/#'+encoded);
         });
-    }
+    };
 
-    cryptolink.encode_url = encode_url;
+    cryptolink.encode_public_url = function(host_url,content,success){
+        LZMA.compress(content,5, function(result){
+            result = new Uint8Array((new Int8Array(result)).buffer);
+            var encoded = base64ArrayBuffer(result);
+            success(host_url+'/'+cryptolink.version+'/public/#'+encoded);
+        });
+    };
 
 })();

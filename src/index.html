@@ -88,12 +88,27 @@
                     <span id='security' class='textinput width-medium invalid glueleft hidden'></span>
 
                     <button class='button disabled' id='submit'>Encrypt!</button>
-
-                    <div class='urlbox hidden'>
-                        <em>URL:</em><a href='#' class='url'></a>
-                        <div id='qrcode'></div>
-                        <div class='status'>
-                            Length: <em class='js-url-length'>284</em> Encrypted: <em class='js-url-encrypted'>No</em>
+                    
+                    <div id='display' class='hidden'>
+                        <div id='display-type' class='radiobutton'>
+                            <span class='option first active' data-type='url'>
+                                <i class='icon-link'></i>
+                            </span>
+                            <span class='option last' data-type='qrcode'>
+                                <i class='icon-qrcode'></i>
+                            </span>
+                        </div>
+                        <span class='label invisible'>
+                            Encrypted URL
+                        </span>
+                        <div id='display-url' class='urlbox'>
+                            <em>URL:</em><a href='#' class='url'></a>
+                            <div class='status'>
+                                Size: <em class='js-url-length'>284</em> Encrypted: <em class='js-url-encrypted'>No</em>
+                            </div>
+                        </div>
+                        <div id='display-qrcode' class='hidden'>
+                            <div id='qrcode'></div>
                         </div>
                     </div>
                 </div>

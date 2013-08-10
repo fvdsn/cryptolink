@@ -244,7 +244,7 @@ $(function(){
         }else{
             $('#submit').addClass('disabled');
         }
-        $('.urlbox').addClass('hidden');
+        $('#display').addClass('hidden');
     }
 
     var editors = {
@@ -335,19 +335,40 @@ $(function(){
         var content = editor.get_encoded_content();
         var password = $('#password').val();
 
+
         function on_encoding_success(url){
             $('.urlbox .url').attr('href',url).text(url.slice(0,1024));
-            $('.urlbox .js-url-length').text(url.length);
+            $('.urlbox .js-url-length').text(url.length < 1024 ? 
+                  url.length+ ' Bytes' 
+                : Math.floor(url.length*10/1024) / 10 + ' KiB');
             $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
-            $('.urlbox').removeClass('hidden');
             $('.loading').addClass('hidden');
-            if(url.length <= 4296){
-                $('#qrcode').empty();
+            $('#display').removeClass('hidden');
+
+            $('#qrcode').empty();
+
+            var correctLevel = null;
+            var small = url.length < 175;
+
+            if(url.length <= 1273){
+                correctLevel = QRCode.CorrectLevel.H;
+            }else if (url.length <= 1663){
+                correctLevel = QRCode.CorrectLevel.Q;
+            }else if (url.length <= 2331){
+                correctLevel = QRCode.CorrectLevel.M;
+            }else if (url.length <= 2953){
+                correctLevel = QRCode.CorrectLevel.L;
+            }
+
+            if(correctLevel){
                 new QRCode($('#qrcode')[0],{
                     'text': url,
-                    'width': 568,
-                    'height': 568,
+                    'width': small ? 284 : 568,
+                    'height': small ? 284 : 568,
+                    'correctLevel' : correctLevel,
                 });
+            }else{
+                $('#qrcode').text('Sorry, the data is too big to fit in a QR-Code');
             }
         }
 
@@ -362,4 +383,38 @@ $(function(){
             },500);
         }
     });
+
+    /* ---- Encrypted Result Display ---- */
+    
+    var display_type = null;
+
+    function set_display(type){
+        if(display_type !== type){
+            if(display_type){
+                $('#display-'+display_type).addClass('hidden');
+            }
+            display_type = type;
+            $('#display-'+type).removeClass('hidden');
+            $('#display-type .option.active').removeClass('active');
+        }
+        $('#display-type .option[data-type="'+type+'"]').addClass('active');
+    }
+    set_display('url');
+    
+    $('#display-type .option').click(function(){
+        set_display($(this).data('type'));
+    });
+    $('#display-type .option').hover(function(){
+            console.log('hover');
+            var type = $(this).data('type');
+            var label = $('#display .label');
+            if(type === 'url'){
+                label.text('Encrypted URL');
+            }else if(type === 'qrcode'){
+                label.text('Encrypted QR-Code');
+            }
+            label.removeClass('invisible');
+        },function(){
+            $('#display .label').addClass('invisible');
+        });
 });

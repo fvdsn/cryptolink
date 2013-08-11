@@ -134,12 +134,13 @@ a {
     padding: 16px;
     font-size: 16px;
     font-family: 'Source Sans Pro';
-    box-sizing: border-box;
     color: rgb(180,180,180);
     overflow: hidden;
     text-overflow: ellipsis;
     resize: none;
     vertical-align: top;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
     -webkit-transition: background 150ms;
        -moz-transition: background 150ms;
         -ms-transition: background 150ms;
@@ -197,7 +198,6 @@ a {
     border: none;
     font-size: 16px;
     font-family: 'Source Sans Pro';
-    box-sizing: border-box;
     color: rgb(180,180,180);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -205,6 +205,8 @@ a {
     resize: none;
     text-align: center;
     cursor: pointer;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
     -webkit-transition: background 150ms;
        -moz-transition: background 150ms;
         -ms-transition: background 150ms;

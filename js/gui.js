@@ -231,7 +231,11 @@ $(function(){
             self.content = '<img src="'+event.target.result+'">';
             self.$el.find('.userimages').empty();
             self.$el.find('.userimages').append(img);
-            self.$el.find('.dropinvite').addClass('hidden');
+            self.$el.find('.dropinvite').addClass('hidden');  
+            self.$el.removeClass('smallpic');
+            if(img.width < self.$el.innerWidth() || img.height < self.$el.innerHeight()){
+                self.$el.addClass('smallpic');
+            }
             self.update();
         };
         reader.onerror = function(){

@@ -216,6 +216,10 @@ a {
         -ms-user-select: none;
             user-select: none;
 }
+#editor-img.smallpic{
+    padding: 16px;
+    min-height: 32px;
+}
 .dropinvite{
     display: inline-block;
     text-align: center;

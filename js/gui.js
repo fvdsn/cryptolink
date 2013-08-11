@@ -361,6 +361,10 @@ $(function(){
             }else{
                 $('#qrcode').text('Sorry, the data is too big to fit in a QR-Code');
             }
+            
+            $('html, body').animate({
+                scrollTop: $('#display').offset().top - window.innerHeight * 0.3
+            },500);
         }
 
         if(content){ 

@@ -370,7 +370,8 @@ $(function(){
         if(content){ 
             $('.loading').removeClass('hidden');
             setTimeout(function(){
-                var basedir = window.location.origin + window.location.pathname;
+                var origin = window.location.origin || window.location.protocol + '//' + window.location.host;
+                var basedir = origin + window.location.pathname;
                 if(password){
                     cryptolink.encode_encrypted_url(basedir,content,password,on_encoding_success);
                 }else{

@@ -139,6 +139,7 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     resize: none;
+    vertical-align: top;
     -webkit-transition: background 150ms;
        -moz-transition: background 150ms;
         -ms-transition: background 150ms;
@@ -248,6 +249,7 @@ a {
 #security{
     position: relative;
     display: inline-block;
+    vertical-align: top;
     width: 120px;
     -webkit-transition: all 250ms linear;
        -moz-transition: all 250ms linear;
@@ -284,6 +286,7 @@ a {
     border: none;
     outline: none;
     text-shadow: 0px 1px 1px rgba(8, 65, 5, 0.53);
+    vertical-align: top;
     user-select: none;
     -webkit-transition: all 150ms linear;
        -moz-transition: all 150ms linear;

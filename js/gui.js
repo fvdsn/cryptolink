@@ -350,22 +350,10 @@ $(function(){
             var correctLevel = null;
             var small = url.length < 175;
 
-            if(url.length <= 1273){
-                correctLevel = QRCode.CorrectLevel.H;
-            }else if (url.length <= 1663){
-                correctLevel = QRCode.CorrectLevel.Q;
-            }else if (url.length <= 2331){
-                correctLevel = QRCode.CorrectLevel.M;
-            }else if (url.length <= 2953){
-                correctLevel = QRCode.CorrectLevel.L;
-            }
-
-            if(correctLevel){
-                new QRCode($('#qrcode')[0],{
+            if(url.length <= 2953){
+                $('#qrcode').qrcode({
                     'text': url,
-                    'width': small ? 284 : 568,
-                    'height': small ? 284 : 568,
-                    'correctLevel' : correctLevel,
+                    'size': small ? 284 : 568,
                 });
             }else{
                 $('#qrcode').text('Sorry, the data is too big to fit in a QR-Code');

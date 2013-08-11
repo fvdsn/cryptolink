@@ -44,7 +44,7 @@ $(function(){
             this.onupdate(this);
         }
         this.el.style.height = 'auto';
-        this.el.style.height = this.el.scrollHeight + 'px';
+        this.el.style.height = Math.max(this.el.scrollHeight,222) + 'px';
     };
     proto.get_encoded_content = function(){
         // does txt.split(sep) then inserts the sep between the tokens

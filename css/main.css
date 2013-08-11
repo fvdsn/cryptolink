@@ -57,7 +57,46 @@ a {
 .pagetitle{
     text-align: center;
 }
+/* ----- Scrollbars ----- */
+
+*::-webkit-scrollbar{
+    width:  12px;
+    height: 12px;
+}
+*::-webkit-scrollbar-track{
+    background: rgb(40,40,40);
+}
+*::-webkit-scrollbar-thumb{
+    background: rgb(100,100,100);
+    min-height: 30px;
+    border-radius: 3px;
+    border: solid 1px rgb(40,40,40);
+    -webkit-transition: all 250ms linear;
+}
+*::-webkit-scrollbar-thumb:hover{
+    background: rgb(120,120,120);
+}
+#editor-html *::-webkit-scrollbar{
+    width:  12px;
+    height: 12px;
+}
+#editor-html *::-webkit-scrollbar-track{
+    background: rgb(40,35,35);
+    border-radius: 3px;
+}
+#editor-html *::-webkit-scrollbar-thumb{
+    background: rgb(92,87,87);
+    min-height: 30px;
+    border-radius: 3px;
+    border: solid 1px rgb(40,35,35);
+    -webkit-transition: all 250ms linear;
+}
+#editor-html *::-webkit-scrollbar-thumb:hover{
+    background: rgb(102,97,97);
+}
+
 /* ----- Outside Links ----- */
+
 .links,.footer {
     text-align: center;
     color: rgb(83, 83, 83);

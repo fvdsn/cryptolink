@@ -363,10 +363,11 @@ $(function(){
         if(content){ 
             $('.loading').removeClass('hidden');
             setTimeout(function(){
+                var basedir = window.location.origin + window.location.pathname;
                 if(password){
-                    cryptolink.encode_encrypted_url(window.location.origin,content,password,on_encoding_success);
+                    cryptolink.encode_encrypted_url(basedir,content,password,on_encoding_success);
                 }else{
-                    cryptolink.encode_public_url(window.location.origin,content,on_encoding_success);
+                    cryptolink.encode_public_url(basedir,content,on_encoding_success);
                 }
             },500);
         }

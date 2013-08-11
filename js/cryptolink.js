@@ -5,8 +5,9 @@
     cryptolink.version = "1.0";
 
     var header_template = [
-        "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>",
-        "<link rel='stylesheet' href='/css/main.css'>",
+        "<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>",
+        "<link rel='stylesheet' href='../css/main.css'>",
+        "<link rel='stylesheet' href='../../css/main.css'>",    // FIXME Not proud of this ...
         "<style>",
             "html{ position: static; }",
             ".centerbox{ width: 350px; height: 200px; position: absolute;",
@@ -16,7 +17,6 @@
             ".bottomlink{ width: 350px; text-align: center; position: absolute; bottom: 0px;",
                     "left: 50%; margin-left:-175px; margin-bottom: 8px; text-decoration: none; color: rgb(120,120,120); }",
             "#errorbox{ width: 334px; text-align: center; }",
-            
         "</style>",
         "",
     ].join('\n');
@@ -130,12 +130,12 @@
     cryptolink.encode_encrypted_url = function(host_url,content,password,success){
         var encoded = LZString.compressToBase64(content);
         encoded = CryptoJS.AES.encrypt(encoded,password).toString();
-        success(host_url+'/'+cryptolink.version+'/#'+encoded);
+        success(host_url+cryptolink.version+'/#'+encoded);
     };
 
     cryptolink.encode_public_url = function(host_url,content,success){
         var encoded = LZString.compressToBase64(content);
-        success(host_url+'/'+cryptolink.version+'/public/#'+encoded);
+        success(host_url+cryptolink.version+'/public/#'+encoded);
     };
 
 })();

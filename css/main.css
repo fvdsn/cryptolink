@@ -226,10 +226,7 @@ a {
 }
 
 #img-selector{
-    opacity: 0;
-    cursor: pointer;
-    position: absolute;
-    top: 0; right: 0; bottom:0; left: 0;
+    display: none;
 }
 .userimages img{
     max-width: 100%;

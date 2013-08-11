@@ -178,7 +178,10 @@ $(function(){
         this.onupdate = onupdate;
         this.update();
         this.content = '';
-        this.$el.find('#img-selector').on('change',function(event){
+        this.$el.click(function(){
+            $('#img-selector').click();
+        });
+        $('#img-selector').on('change',function(event){
             self.loadimage(event.target.files[0]);
         });
     }

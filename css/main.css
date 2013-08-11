@@ -42,9 +42,11 @@ a {
     -webkit-transition: opacity 150ms linear;
 }
 .centered{
-    text-align: center;
+    text-align: center !important;
 }
-
+.important{
+    color: #43A853 !important;
+}
 .page{
     overflow: none;
     width: 600px;
@@ -107,6 +109,10 @@ a {
     text-align: center;
     text-decoration: none;
     margin-bottom: 10px;
+    -webkit-transition: color 150ms linear;
+}
+.links a:hover {
+    color: rgb(120,120,120);
 }
 .footer {
     margin-top: 60px;

@@ -342,7 +342,7 @@ $(function(){
         function on_encoding_success(url){
             $('.urlbox .url').attr('href',url).text(url.slice(0,1024));
             $('.urlbox .js-url-length').text(url.length < 1024 ? 
-                  url.length+ ' Bytes' 
+                  url.length+ ' characters' 
                 : Math.floor(url.length*10/1024) / 10 + ' KiB');
             $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
             $('.loading').addClass('hidden');

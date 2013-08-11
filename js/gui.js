@@ -23,6 +23,8 @@ $(function(){
     proto.show = function(){
         this.$el.removeClass('hidden');
         this.update();
+    };
+    proto.focus = function(){
         this.$el.focus();
     };
     proto.hide = function(){
@@ -269,6 +271,7 @@ $(function(){
     }
 
     set_editor('text');
+    editor.focus();
 
     $('#content-type .option').click(function(){
         set_editor($(this).data('type'));

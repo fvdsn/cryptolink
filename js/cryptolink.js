@@ -54,6 +54,7 @@
         $('#password').bind('change input propertychange',function(){
             $('#decrypt').toggleClass('disabled',!$(this).val());
         });
+        $('#password').focus();
 
         $('#decrypt').click(function(){
             $('#errobox').addClass('hidden');

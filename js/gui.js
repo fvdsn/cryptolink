@@ -388,6 +388,18 @@ $(function(){
         }
     });
 
+    /* ----- Copy URL Button ----- */
+    
+    ZeroClipboard.setDefaults({ 
+        moviePath: 'js/vendor/ZeroClipboard.swf',
+        forceHandCursor: true,
+    });
+
+    var clip = new ZeroClipboard($('#copyurl'));
+    clip.on('dataRequested', function(client, args){
+        client.setText($('.urlbox .url').attr('href'));
+    });
+
     /* ---- Encrypted Result Display ---- */
     
     var display_type = null;

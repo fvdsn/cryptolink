@@ -50,6 +50,12 @@ a {
 .important{
     color: #43A853 !important;
 }
+.float-right{
+    float: right !important;
+}
+.float-left{
+    float: left !important;
+}
 .page{
     overflow: none;
     width: 600px;
@@ -334,13 +340,16 @@ a {
 .urlbox{
     padding: 16px;
     background: rgb(58, 58, 58);
-    text-overflow: ellipsis;
     overflow: hidden;
     border-radius: 3px;
     color: rgb(219, 219, 219);
 }
 .urlbox .url{
-    white-space: nowrap;
+     white-space: nowrap;
+     display: inline-block;
+     max-width: 485px;
+     overflow: hidden;
+     text-overflow: ellipsis;
 }
 .urlbox em{
     font-weight: 900;
@@ -358,6 +367,25 @@ a {
     text-align: center;
     margin-top: 8px;
     opacity: 0.5;
+}
+#copyurl {
+    background: #43A853;
+    padding: 1px 3px;
+    border-radius: 3px;
+    color: rgb(19, 83, 45);
+    cursor: pointer;
+    margin-left: 5px;
+    -webkit-transition: all 100ms linear;
+       -moz-transition: all 100ms linear;
+        -ms-transition: all 100ms linear;
+            transition: all 100ms linear;
+}
+#copyurl.zeroclipboard-is-hover{
+    background: #53B863;
+}
+#copyurl.zeroclipboard-is-hover.zeroclipboard-is-active{
+    background: black;
+    color: white;
 }
 
 /* ------ QR CODE ------ */

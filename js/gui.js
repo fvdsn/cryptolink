@@ -365,6 +365,8 @@ $(function(){
                     'text': url,
                     'size': small ? 284 : 568,
                 });
+                var imgdata = $('#qrcode canvas')[0].toDataURL();
+                $('#qrcode canvas').replaceWith($('<img>').attr('src',imgdata));
             }else{
                 $('#qrcode').text('Sorry, the data is too big to fit in a QR-Code');
             }

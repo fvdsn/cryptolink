@@ -467,6 +467,9 @@ a {
     color: black;
     text-align: center;
 }
+#qrcode img{
+    max-width: 100%;
+}
 
 /* ------ LOADING SCREEN ------ */
 

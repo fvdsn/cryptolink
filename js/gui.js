@@ -397,12 +397,16 @@ $(function(){
     
     ZeroClipboard.setDefaults({ 
         moviePath: 'js/vendor/ZeroClipboard.swf',
-        forceHandCursor: true,
+        forceHandCursor: true, //FIXME: not working.
     });
 
     var clip = new ZeroClipboard($('#copyurl'));
+
     clip.on('dataRequested', function(client, args){
         client.setText($('.urlbox .url').attr('href'));
+    });
+    clip.on('noflash',function(){
+        $('#copyurl').addClass('hidden');
     });
 
     /* ---- Encrypted Result Display ---- */

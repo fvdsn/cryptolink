@@ -65,9 +65,20 @@ a {
 .page p{
     text-align: justify;
 }
+
+/* ----- TITLE AND LOGO ----- */
+
 .pagetitle{
-    text-align: center;
+    width: 400px;
+    margin: 60px auto;
 }
+.pagetitle *{
+    margin: 0px;
+}
+.pagetitle img{
+    float: left;
+}
+
 /* ----- Scrollbars ----- */
 
 *::-webkit-scrollbar{

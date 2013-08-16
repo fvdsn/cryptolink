@@ -343,6 +343,11 @@ $(function(){
 
     $('#password').bind('change input propertychange',checkPassword);
     $('#password').val('');
+    $('#password').keypress(function(e){
+        if(e.which === 13){
+            $('#submit').click();
+        }
+    });
 
     $('#submit').click(function(){
         var content = editor.get_encoded_content();

@@ -55,6 +55,11 @@
             $('#decrypt').toggleClass('disabled',!$(this).val());
         });
         $('#password').focus();
+        $('#password').keypress(function(e){
+            if(e.which === 13){
+                $('#decrypt').click();
+            }
+        });
 
         $('#decrypt').click(function(){
             $('#errobox').addClass('hidden');

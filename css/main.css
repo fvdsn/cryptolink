@@ -4,7 +4,7 @@
 html{
     position: relative;
     background: rgb(68,68,68);
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
     color: rgb(184,184,184);
 }
 
@@ -14,13 +14,13 @@ h1,h2,h3,h4,h5{
 h1{
     font-size: 54px;
     font-weight: 200;
-    margin: 60px 0px 0px;
+    margin: 0px;
 }
 h2{
     font-size: 23px;
     letter-spacing: 1px;
     font-weight: 300;
-    margin: 0px 0px 60px;
+    margin: 0px;
     opacity: 0.6;
 }
 h3 {
@@ -56,11 +56,29 @@ a {
 .float-left{
     float: left !important;
 }
+@media print {
+    .noprint.noprint-active{
+        display: none !important;
+    }
+}
+.onlyprint{
+    display: none !important;
+}
+
+/* ----- LAYOUT ----- */
+
 .page{
     overflow: none;
-    width: 600px;
+    max-width: 600px;
     margin: 0px auto;
     
+}
+@media all and (max-width: 632px) {
+    .page{
+        max-width: 632px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }
 .page p{
     text-align: justify;
@@ -78,6 +96,7 @@ a {
 .pagetitle img{
     float: left;
 }
+
 
 /* ----- Scrollbars ----- */
 
@@ -117,7 +136,7 @@ a {
     background: rgb(102,97,97);
 }
 
-/* ----- Outside Links ----- */
+/* ----- EXTERNAL LINK BAR ----- */
 
 .links,.footer {
     text-align: center;
@@ -126,6 +145,7 @@ a {
 .links a {
     display: inline-block;
     width: 24%;
+    min-width: 100px;
     text-align: center;
     text-decoration: none;
     margin-bottom: 10px;
@@ -141,7 +161,8 @@ a {
     margin-top: 60px;
     
 }
-/* ----- Text Inputs ----- */
+
+/* ----- TEXT BOXES ----- */
 
 .textinput{
     background: rgb(85,85,85);
@@ -190,11 +211,21 @@ a {
     background: rgb(85, 119, 90);
     color: rgb(150, 255, 154);
 }
-.textinput.glueleft{
-    margin-left: -5px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-left: solid 2px rgba(0, 0, 0, 0.3);
+@media all and (min-width: 490px){
+    .textinput.glueleft{
+        margin-left: -5px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-left: solid 2px rgba(0, 0, 0, 0.3);
+    }
+}
+@media all and (max-width: 490px){
+    .textinput:not(.hidden){
+        display: block !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        width: 100% !important;
+    }
 }
 
 
@@ -263,6 +294,9 @@ a {
     right: 20%;
     text-align: center;
 }
+
+/* ----- PASSWORD INPUT ----- */
+
 #password{
     width: 230px;
 }
@@ -290,6 +324,7 @@ a {
     height: 5px;
     background: rgba(255, 255, 255, 0.08);
 }
+
 /* ----- BUTTONS ----- */
 
 .button{
@@ -327,17 +362,18 @@ a {
     color: rgb(209, 209, 209);
     background: rgb(85, 119, 90);
 }
+@media all and (max-width: 490px){
+    .button{
+        display: block !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        width: 100%; !important;
+    }
+}
+
 
 .textinput+.button{
     margin-left: 14px;
-}
-
-.btn{
-    background: rgb(184,184,184);
-    border-radius: 3px;
-    cursor: pointer;
-    color: rgb(68,68,68);
-    padding: 2px 4px;
 }
 
 /* ----- URL BOX ----- */
@@ -447,6 +483,7 @@ a {
     background: rgb(54,54,54);
     padding: 60px 0px;
 }
+
 /* ----- RADIO BUTTONS ----- */
 
 .radiobutton{
@@ -476,6 +513,7 @@ a {
 }
 
 /* ----- LABELS ----- */
+
 .label {
     margin-left: 10px;
     opacity: 0.5;

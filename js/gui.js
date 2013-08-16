@@ -104,6 +104,9 @@ $(function(){
         
         var content = this.$el.val();
         var out = [];
+        if(!content){
+            return "";
+        }
         
         content = linebreak(this.linewidth,split(split(split(content,'\n'),'\t'),' '));
         

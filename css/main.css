@@ -406,11 +406,15 @@ a {
     color: rgb(219, 219, 219);
 }
 .urlbox .url{
+     display: block;
+     margin-left: 50px;
+     margin-right: 40px;
      white-space: nowrap;
-     display: inline-block;
-     max-width: 485px;
      overflow: hidden;
      text-overflow: ellipsis;
+}
+.urlbox .url_prefix{
+    float: left;
 }
 .urlbox em{
     font-weight: 900;
@@ -430,6 +434,7 @@ a {
     opacity: 0.5;
 }
 #copyurl {
+    float: right;
     background: #43A853;
     padding: 1px 3px;
     border-radius: 3px;
@@ -461,6 +466,9 @@ a {
     border-radius: 3px;
     color: black;
     text-align: center;
+}
+#qrcode img{
+    max-width: 100%;
 }
 
 /* ------ LOADING SCREEN ------ */

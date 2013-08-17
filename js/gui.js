@@ -145,7 +145,7 @@ $(function(){
                     ratio = maxwidth / img.width;
                 }
                 if(img.height * ratio > maxheight){
-                    ratio = maxheight / ( img.height * ratio );
+                    ratio = maxheight / img.height;
                 }
                 var width = Math.floor(img.width * ratio);
                 var height = Math.floor(img.height * ratio);
@@ -184,7 +184,6 @@ $(function(){
             img.src = dataurl;
             self.resize_image(img,600,600,function(img){
                 self.content = img.src;
-                console.log(self.content);
                 self.$el.find('.userimages').empty();
                 self.$el.find('.userimages').append(img);
                 self.$el.find('.dropinvite').addClass('hidden');  
@@ -413,7 +412,6 @@ $(function(){
         set_display($(this).data('type'));
     });
     $('#display-type .option').hover(function(){
-            console.log('hover');
             var type = $(this).data('type');
             var label = $('#display .label');
             if(type === 'url'){

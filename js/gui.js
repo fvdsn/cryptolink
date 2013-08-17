@@ -136,7 +136,7 @@ $(function(){
             if (img.height <= maxheight && img.width <= maxwidth){ 
                 callback(img);
             }else{
-                var img2 = new Image();
+                var jpeg = new Image();
                 var canvas = document.createElement("canvas");
                 var context = canvas.getContext("2d");
                 var ratio  = 1;
@@ -151,9 +151,11 @@ $(function(){
                 canvas.width = Math.floor(img.width * ratio);
                 canvas.height = Math.floor(img.height * ratio);
                 context.drawImage(img,0,0,canvas.width,canvas.height);
-                img2.src = canvas.toDataURL();
-                img2.onload = function(){
-                    callback(img2);
+
+                var encoder = new JPEGEncoder(90);
+                jpeg.src = encoder.encode(context.getImageData(0,0,canvas.width,canvas.height));
+                jpeg.onload = function(){
+                    callback(jpeg);
                 }
             }
         }

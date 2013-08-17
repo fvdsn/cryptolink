@@ -154,7 +154,7 @@ $(function(){
                 canvas.height = height;
                 context.drawImage(img,0,0,width,height);
 
-                var encoder = new JPEGEncoder(90);
+                var encoder = new JPEGEncoder(70);
                 jpeg.src = encoder.encode(context.getImageData(0,0,width,height));
                 jpeg.onload = function(){
                     callback(jpeg);

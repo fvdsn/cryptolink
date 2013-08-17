@@ -28,6 +28,11 @@ h3 {
     font-size: 36px;
     margin: 30px 0 -5px;
 }
+.subtitle{
+    margin: -8px 0px 8px;
+    opacity: 0.5;
+}
+
 a {
     color: inherit;
 }
@@ -49,6 +54,9 @@ a {
 }
 .important{
     color: #43A853 !important;
+}
+.warn{
+    color: rgb(141, 126, 255) !important
 }
 .float-right{
     float: right !important;

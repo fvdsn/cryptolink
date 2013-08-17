@@ -6,7 +6,6 @@ $(function(){
         var  self = this;
         this.el   = $el.get(0);
         this.$el  = $(this.el);
-        this.linewidth = 71;
         this.onupdate = onupdate;
         this.$el.bind('input propertychange',function(){ 
             self.update(); 
@@ -31,7 +30,7 @@ $(function(){
         this.$el.addClass('hidden');
     };
     proto.has_content = function(){
-        return this.$el.val() !== "";
+        return !!this.get_content();
     };
     proto.set_content = function(txt){
         this.$el.val(txt);
@@ -45,81 +44,6 @@ $(function(){
         }
         this.el.style.height = 'auto';
         this.el.style.height = Math.max(this.el.scrollHeight,222) + 'px';
-    };
-    proto.get_encoded_content = function(){
-        // does txt.split(sep) then inserts the sep between the tokens
-        function split(txt,sep){
-            var out = [];
-            txt = txt instanceof Array ? txt : [txt];
-            for(var i = 0, len = txt.length; i < len; i++){
-                var tokens = txt[i].split(sep);
-                for(var j = 0, jlen = tokens.length; j < jlen; j++){
-                    if(tokens[j] !== ""){
-                        out.push(tokens[j]);
-                    }
-                    if(j !== jlen -1){
-                        out.push(sep);
-                    }
-                }
-            }
-            return out;
-        }
-        function linebreak(width,tokens){
-            var out = [];
-            var currlen = 0;
-            var linebreak = false;
-            for(var i = 0, len = tokens.length; i < len; i++){
-                var token = tokens[i];
-                var tokenlen = token === '\t' ? 4 : token.length;
-
-                if(token === '\n'){
-                    out.push('\n');
-                    currlen = 0;
-                }else if(currlen && currlen + tokenlen > width){
-                    out.push('\n');
-                    if(token === ' '){
-                        currlen = 0;
-                    }else{
-                        out.push(token);
-                        currlen = tokenlen;
-                    }
-                }else{
-                    currlen += tokens[i].length;
-                    out.push(tokens[i]);
-                }
-            }
-            return out;
-        }
-        var entity_map = { 
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': '&quot;',
-            "'": '&#39;',
-            "/":"/",
-        };
-        function escape_html(txt){
-            return txt.replace(/[&<>"'\/]/g, function(s){ return entity_map[s]; });
-        }
-        
-        var content = this.$el.val();
-        var out = [];
-        if(!content){
-            return "";
-        }
-        
-        content = linebreak(this.linewidth,split(split(split(content,'\n'),'\t'),' '));
-        
-        var urlrgxp = /(^(http|https|ftp|file|)\:\/\/|^(mailto\:|magnet\:))/;
-
-        for(var i = 0, len = content.length; i < len; i++){
-            if(urlrgxp.test(content[i])){
-                out.push('<a href="'+encodeURI(content[i])+'">'+escape_html(content[i])+'</a>');
-            }else{
-                out.push(escape_html(content[i]));
-            }
-        }
-        return '<pre>'+out.join("")+'</pre>';
     };
 
     /* ----- HTML Text Editor ----- */
@@ -159,17 +83,11 @@ $(function(){
         this.editor.resize();
     };
 
-    proto.has_content = function(){
-        return this.editor.getValue() !== "";
-    };
     proto.get_content = function(){
         return this.editor.getValue();
     };
     proto.set_content = function(txt){
         this.editor.setValue(txt);
-    };
-    proto.get_encoded_content = function(){
-        return this.editor.getValue();
     };
 
     /* ----- Image Uploader ----- */
@@ -204,12 +122,6 @@ $(function(){
     proto.get_content = function(){
         return this.content;
     };
-    proto.get_encoded_content = function(){
-        return this.get_content();
-    };
-    proto.has_content = function(){
-        return this.content !== '';
-    };
     proto.set_content = function(){};
 
     proto.show_error = function(message){
@@ -229,9 +141,16 @@ $(function(){
 
         var reader = new FileReader();
         reader.onload = function(event){
+            var dataurl = event.target.result;
+
+            if(!cryptolink.is_image_format_allowed(dataurl)){
+                self.show_error('Unsupported File Format');
+                return;
+            }
+
             var img = new Image();
-            img.src = event.target.result;
-            self.content = '<img src="'+event.target.result+'">';
+            img.src = dataurl;
+            self.content = dataurl;
             self.$el.find('.userimages').empty();
             self.$el.find('.userimages').append(img);
             self.$el.find('.dropinvite').addClass('hidden');  
@@ -350,16 +269,15 @@ $(function(){
     });
 
     $('#submit').click(function(){
-        var content = editor.get_encoded_content();
+        var content = editor.get_content();
         var password = $('#password').val();
-
 
         function on_encoding_success(url){
             $('.urlbox .url').attr('href',url).text(url.slice(0,1024));
             $('.urlbox .js-url-length').text(url.length < 1024 ? 
                   url.length+ ' characters' 
                 : Math.floor(url.length*10/1024) / 10 + ' KiB');
-            $('.urlbox .js-url-encrypted').text( password ? 'Yes' : 'No');
+            $('.urlbox .js-url-executable').text( editor.type === 'html' ? 'Yes' : 'No');
             $('.loading').addClass('hidden');
             $('#display').removeClass('hidden');
 
@@ -384,16 +302,19 @@ $(function(){
             },500);
         }
 
-        if(content){ 
+        if(content && password){ 
             $('.loading').removeClass('hidden');
             setTimeout(function(){
                 var origin = window.location.origin || window.location.protocol + '//' + window.location.host;
-                var basedir = origin + window.location.pathname;
-                if(password){
-                    cryptolink.encode_encrypted_url(basedir,content,password,on_encoding_success);
-                }else{
-                    cryptolink.encode_public_url(basedir,content,on_encoding_success);
-                }
+                var baseurl = origin + window.location.pathname;
+
+                cryptolink.encode_url({
+                    baseurl: baseurl,
+                    content: content,
+                    type: editor.type,
+                    password: password
+                }, on_encoding_success );
+
             },500);
         }
     });

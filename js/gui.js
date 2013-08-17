@@ -116,7 +116,7 @@ $(function(){
 
     proto.update = function(){
         if(this.onupdate){
-            this.onupdate(this);
+            this.onupdate();
         }
     };
     proto.get_content = function(){
@@ -169,8 +169,10 @@ $(function(){
 
     /* ----- Main GUI ----- */
     
-    function on_content_changed(editor){
-        if(editor.has_content()){
+    var editor = null;
+
+    function on_content_changed(){
+        if(editor && editor.has_content() && $('#password').val()){
             $('#submit').removeClass('disabled');
         }else{
             $('#submit').addClass('disabled');
@@ -184,7 +186,7 @@ $(function(){
         'img' : new ImgEditor($('#editor-img'), on_content_changed),
     };
 
-    var editor = editors.text;
+    editor = editors.text;
 
     function set_editor(type){
         if(editors[type] && editor.type !== type){
@@ -242,7 +244,7 @@ $(function(){
     }
 
     var timeout = null;
-    function checkPassword(){
+    function check_password(){
         var pw = $('#password');
         clearTimeout(timeout);
         timeout = setTimeout(function(){
@@ -260,13 +262,28 @@ $(function(){
         },100);
     }
 
-    $('#password').bind('change input propertychange',checkPassword);
+    $('#password').bind('change input propertychange',check_password);
+    $('#password').bind('change input propertychange',on_content_changed);
     $('#password').val('');
     $('#password').keypress(function(e){
         if(e.which === 13){
             $('#submit').click();
         }
     });
+
+    function flash_class($el,css_class){
+        $el.addClass('transition0');
+        $el.addClass(css_class);
+        setTimeout(function(){
+            $el.removeClass('transition0');
+            $el.addClass('transition500');
+            $el.removeClass(css_class);
+            setTimeout(function(){
+                $el.removeClass('transition500');
+            },500);
+        },100);
+    }
+    window.flash_class = flash_class;
 
     $('#submit').click(function(){
         var content = editor.get_content();
@@ -301,7 +318,12 @@ $(function(){
                 scrollTop: $('#display').offset().top - window.innerHeight * 0.3
             },500);
         }
-
+        if(!content){
+            flash_class(editor.$el,'invalid');
+        }
+        if(!password){
+            flash_class($('#password'),'invalid');
+        }
         if(content && password){ 
             $('.loading').removeClass('hidden');
             setTimeout(function(){

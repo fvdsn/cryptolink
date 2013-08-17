@@ -225,13 +225,25 @@ a {
 .textinput+.textinput{
     margin-left:14px;
 }
-.textinput.invalid{
-    background: rgb(112, 77, 77);
-    color: rgb(255, 150, 150);
+.transition0 {
+    -webkit-transition: none !important;
+       -moz-transition: none !important;
+        -ms-transition: none !important;
+            transition: none !important;
 }
-.textinput.valid{
-    background: rgb(85, 119, 90);
-    color: rgb(150, 255, 154);
+.transition500 {
+    -webkit-transition: all 500ms ease-out !important;
+       -moz-transition: all 500ms ease-out !important;
+        -ms-transition: all 500ms ease-out !important;
+            transition: all 500ms ease-out !important;
+}
+.invalid{
+    background: rgb(112, 77, 77) !important;
+    color: rgb(255, 150, 150) !important;
+}
+.valid{
+    background: rgb(85, 119, 90) !important;
+    color: rgb(150, 255, 154) !important;
 }
 @media all and (min-width: 490px){
     .textinput.glueleft{

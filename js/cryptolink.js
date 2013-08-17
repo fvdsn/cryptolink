@@ -12,13 +12,6 @@
         "<link rel='stylesheet' href='" + args.baseurl + "/css/main.css'>",
         "<style>",
             "html{ position: static; }",
-            ".centerbox{ width: 350px; height: 200px; position: absolute;",
-                    "top: 50%; left: 50%; margin-top:-100px; margin-left:-175px;}",
-            ".centerbox h3{ font-size: 30px; margin: 30px 0px 8px; font-weight: 300; }",
-            ".centerbox.dark { padding: 0px 32px; box-sizing: border-box; border-radius: 3px; background: rgba(0, 0, 0, 0.11); }",
-            ".bottomlink{ width: 350px; text-align: center; position: absolute; bottom: 0px;",
-                    "left: 50%; margin-left:-175px; margin-bottom: 8px; text-decoration: none; color: rgb(120,120,120); }",
-            "#errorbox{ width: 334px; text-align: center; }",
         "</style>",
         "",
         ].join('\n');

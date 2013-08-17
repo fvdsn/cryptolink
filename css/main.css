@@ -542,6 +542,11 @@ a {
     cursor: pointer;
     user-select: none;
 }
+@media all and ( max-width: 490px ) {
+    .radiobutton > .option{
+        padding: 8px 11px;
+    }
+}
 .radiobutton > .option.active{
     background: rgb(45,45,45);
 }

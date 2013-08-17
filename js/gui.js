@@ -131,7 +131,7 @@ $(function(){
     proto.hide_error = function(){
         $('#img-error').addClass('hidden');
     };
-    proto.resize_image = function(img,maxheight,maxwidth,callback){
+    proto.resize_image = function(img,maxwidth,maxheight,callback){
         img.onload = function(){
             if (img.height <= maxheight && img.width <= maxwidth){ 
                 callback(img);
@@ -182,7 +182,7 @@ $(function(){
 
             var img = new Image();
             img.src = dataurl;
-            self.resize_image(img,600,600,function(img){
+            self.resize_image(img,600,1200,function(img){
                 self.content = img.src;
                 self.$el.find('.userimages').empty();
                 self.$el.find('.userimages').append(img);

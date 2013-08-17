@@ -147,13 +147,15 @@ $(function(){
                 if(img.height * ratio > maxheight){
                     ratio = maxheight / ( img.height * ratio );
                 }
+                var width = Math.floor(img.width * ratio);
+                var height = Math.floor(img.height * ratio);
 
-                canvas.width = Math.floor(img.width * ratio);
-                canvas.height = Math.floor(img.height * ratio);
-                context.drawImage(img,0,0,canvas.width,canvas.height);
+                canvas.width = width;
+                canvas.height = height;
+                context.drawImage(img,0,0,width,height);
 
                 var encoder = new JPEGEncoder(90);
-                jpeg.src = encoder.encode(context.getImageData(0,0,canvas.width,canvas.height));
+                jpeg.src = encoder.encode(context.getImageData(0,0,width,height));
                 jpeg.onload = function(){
                     callback(jpeg);
                 }

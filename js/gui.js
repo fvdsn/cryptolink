@@ -131,6 +131,34 @@ $(function(){
     proto.hide_error = function(){
         $('#img-error').addClass('hidden');
     };
+    proto.resize_image = function(img,maxheight,maxwidth,callback){
+        img.onload = function(){
+            if (img.height <= maxheight && img.width <= maxwidth){ 
+                callback(img);
+            }else{
+                var img2 = new Image();
+                var canvas = document.createElement("canvas");
+                var context = canvas.getContext("2d");
+                var ratio  = 1;
+
+                if(img.width > maxwidth){
+                    ratio = maxwidth / img.width;
+                }
+                if(img.height * ratio > maxheight){
+                    ratio = maxheight / ( img.height * ratio );
+                }
+
+                canvas.width = Math.floor(img.width * ratio);
+                canvas.height = Math.floor(img.height * ratio);
+                context.drawImage(img,0,0,canvas.width,canvas.height);
+                img2.src = canvas.toDataURL();
+                img2.onload = function(){
+                    callback(img2);
+                }
+            }
+        }
+    };
+
     proto.loadimage = function(file){
         var self = this;
         this.hide_error();
@@ -150,15 +178,18 @@ $(function(){
 
             var img = new Image();
             img.src = dataurl;
-            self.content = dataurl;
-            self.$el.find('.userimages').empty();
-            self.$el.find('.userimages').append(img);
-            self.$el.find('.dropinvite').addClass('hidden');  
-            self.$el.removeClass('smallpic');
-            if(img.width < self.$el.innerWidth() || img.height < self.$el.innerHeight()){
-                self.$el.addClass('smallpic');
-            }
-            self.update();
+            self.resize_image(img,600,600,function(img){
+                self.content = img.src;
+                console.log(self.content);
+                self.$el.find('.userimages').empty();
+                self.$el.find('.userimages').append(img);
+                self.$el.find('.dropinvite').addClass('hidden');  
+                self.$el.removeClass('smallpic');
+                if(img.width < 600 || img.height < 257){
+                    self.$el.addClass('smallpic');
+                }
+                self.update();
+            });
         };
         reader.onerror = function(){
             self.show_error('Could not read file');

@@ -2,9 +2,9 @@ $(function(){
     
     /* ----- Enable Fast Click ----- */
     
-    if(window.FastClick){
+    /*if(window.FastClick){
         FastClick.attach(document.body);
-    }
+    }*/
 
     /* ----- Simple Text Editor ----- */
 

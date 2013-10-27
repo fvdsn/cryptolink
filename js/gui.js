@@ -258,23 +258,27 @@ $(function(){
     
     function display_security(security,score){
         var s = $('#security');
+        s.removeClass('valid');
+        s.removeClass('improve');
+        s.removeClass('invalid');
+        s.removeClass('hidden');
         if(security === 'insecure'){
                 s.addClass('invalid');
-                s.removeClass('valid');
                 s.html("<span class='progress'></span><i class='icon-warning-sign'></i>&nbsp; Insecure");
-                s.removeClass('hidden');
-                s.find('.progress').css('width',Math.floor(score*100)+'%');
+        }else if(security === 'improve'){
+                s.addClass('improve');
+                s.html("<span class='progress'></span><i class='icon-ok'></i>&nbsp; Not bad");
         }else if(security === 'secure'){
                 s.addClass('valid');
-                s.removeClass('invalid');
                 s.html("<span class='progress'></span><i class='icon-lock'></i>&nbsp; Secure");
-                s.removeClass('hidden');
-                s.find('.progress').css('width',Math.floor(score*100)+'%');
+        }else if(security === 'overkill'){
+                s.addClass('valid');
+                s.html("<span class='progress'></span><i class='icon-lock'></i>&nbsp; Overkill");
         }else{
-                s.removeClass('valid');
                 s.addClass('hidden');
                 s.html('');
         }
+        s.find('.progress').css('width',Math.floor(score*100)+'%');
     }
 
     var timeout = null;
@@ -284,13 +288,17 @@ $(function(){
         timeout = setTimeout(function(){
 
             if(pw.val().length === 0){
-                display_security('none');
+                display_security('none',0);
             }else{
                 var security = zxcvbn(pw.val(),['horsebatterystaple']);
-                if(security.entropy <= 64){
-                    display_security('insecure',security.entropy/64.0);
-                }else{
+                if(security.entropy <= 32){
+                    display_security('insecure',security.entropy/32.0);
+                }else if(security.entropy <= 64){
+                    display_security('improve',(security.entropy-32)/32.0);
+                }else if(security.entropy <= 256){
                     display_security('secure',(security.entropy-64)/192.0);
+                }else{
+                    display_security('overkill',1);
                 }
             }
         },100);

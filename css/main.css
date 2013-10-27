@@ -169,6 +169,9 @@ a {
     text-align: center;
     color: rgb(83, 83, 83);
 }
+.page + .links{
+    margin-top: 60px;
+}
 .links a {
     display: inline-block;
     width: 24%;
@@ -185,7 +188,7 @@ a {
     color: rgb(120,120,120);
 }
 .footer {
-    margin-top: 60px;
+    margin-top: 40px;
     
 }
 
@@ -379,7 +382,6 @@ a {
     border-radius: 3px;
     border: none;
     outline: none;
-    text-shadow: 0px 1px 1px rgba(8, 65, 5, 0.53);
     vertical-align: top;
     user-select: none;
     -webkit-transition: all 150ms linear;
@@ -390,16 +392,19 @@ a {
 .button:focus, .button:hover{
     top: -2px;
     box-shadow: 0px 2px rgb(51, 126, 63), 0px 2px 3px rgba(0, 0, 0, 0.22);
+    text-shadow: 0px 1px 1px rgba(8, 65, 5, 0.53);
 }
 .button:active{
     background: rgb(47, 148, 63);
 }
+/*
 .button.disabled{
     top: 0px;
     box-shadow: none;
-    color: rgb(209, 209, 209);
-    background: rgb(85, 119, 90);
-}
+    text-shadow: none;
+    color: rgb(60,60,60);
+    background: rgb(85, 85,85);
+}*/
 @media all and (max-width: 490px){
     .button{
         display: block !important;
@@ -409,9 +414,26 @@ a {
     }
 }
 
-
 .textinput+.button{
     margin-left: 14px;
+}
+
+.textbutton{
+    background: rgb(150,150,150);
+    color: black;
+    line-height: 40px;
+    border-radius: 3px;
+    padding: 4px 20px;
+    cursor: pointer;
+    margin: 0px 16px;
+    -webkit-transition: all 100ms linear;
+       -moz-transition: all 100ms linear;
+        -ms-transition: all 100ms linear;
+            transition: all 100ms linear;
+}
+
+.textbutton:hover{
+    background: rgb(180,180,180);
 }
 
 /* ----- URL BOX ----- */

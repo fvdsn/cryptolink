@@ -1,4 +1,10 @@
 $(function(){
+    
+    /* ----- Enable Fast Click ----- */
+    
+    if(window.FastClick){
+        FastClick.attach(document.body);
+    }
 
     /* ----- Simple Text Editor ----- */
 

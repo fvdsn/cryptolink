@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>CryptoLink</title>
+        <meta name="description" content="Cryptolink allows you to easily and securely encrypt
+        and decrypt messages, webpages and pictures, without requiring any software installation">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link href='//fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body class='print-text'>
+        <div class='loading hidden'>
+            <div class='throbber'>
+                <i class='icon icon-beaker'></i>
+                <p>encrypting document ...</p>
+            </div>
+        </div>
+        <article class='primary'>
+            <div class='page main'>
+                <div class='pagetitle print-text-only'>
+                    <img src='img/logo.png' alt="CryptoLink's Logo">
+                    <h1>CryptoLink</h1>
+                    <h2>encrypt stuff into links</h2>
+                </div>
+
+                <div class='cryptostuff noprint'>
+                    <div id='content-type'>
+                        <div class='radiobutton'>
+                            <span class='option first' data-type='text'>
+                                <i class='icon-font'></i>
+                            </span>
+                            <span class='option' data-type='html'>
+                                <i class='icon-code'></i>
+                            </span>
+                            <span class='option last' data-type='img'>
+                                <i class='icon-picture'></i>
+                            </span>
+                        </div>
+                        <span class='label invisible'>
+                            Encrypt Text Messages
+                        </span>
+                    </div>
+
+                    <textarea class='textinput fixed' id='editor-text' rows='10' placeholder='Message'></textarea>
+
+                    <span></span>
+                    <div class='textinput fixed hidden' id='editor-html'></div>
+
+                    <input type='file' class='hidden' id='img-selector'></input>
+                    <div class='imageuploader hidden' id='editor-img'>
+                        <div class='userimages'></div>
+                        <div class='dropinvite'>
+                            <i class='icon-picture'></i>
+                            <p>Choose a Picture</p>
+                        </div>
+                        <div id='img-error' class='textinput invalid hidden'>Error</div>
+                    </div>
+
+                    <input id='password' class='textinput' type='password' placeholder='Password'></input>
+                    <span id='security' class='textinput width-medium invalid glueleft hidden'></span>
+
+                    <button class='button disabled' id='submit'>Encrypt!</button>
+                    
+                    <div id='display' class='hidden'>
+                        <div id='display-url' class='urlbox'>
+                            <!--<header>
+                                Your Encrypted Link:
+                                </header>-->
+                            <em class='important url_prefix'>URL:</em>
+                            <span id='copyurl' alt='Copy URL to Clipboard'><i class='icon-copy'></i></span>
+                            <a href='#' target='_blank' class='url important'></a>
+                            <div class='status'>
+                                Length: <em class='js-url-length'>284</em>
+                            </div>
+                            <div class='actions'>
+                                <a href='#' class='action js-action-qrcode'>
+                                    <i class='icon icon-qrcode'></i>
+                                    <span class='label'>QRCode</span>
+                                </a>
+                                <a href='mailto:?body=foobar' class='action js-action-email'>
+                                    <i class='icon icon-envelope'></i>
+                                    <span class='label'>Email</span>
+                                </a>
+                                <a href='sms:123456?body=abc' class='action js-action-sms'>
+                                    <i class='icon icon-comment'></i>
+                                    <span class='label'>SMS</span>
+                                </a>
+                                <a href='#' class='action js-action-copy'>
+                                    <i class='icon icon-copy'></i>
+                                    <span class='label'>Copy</span>
+                                </a>
+                                <a href='#' class='action js-action-print'>
+                                    <i class='icon icon-print'></i>
+                                    <span class='label'>Print</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div id='display-qrcode' class='hidden'>
+                            <div id='qrcode'></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+        <article class='secondary print-text-only'>
+            <nav class='page links'>
+                <a href='http://frederic.vanderessen.com'><i class='icon-rss'></i> Blog</a>
+                <a href='http://twitter.com/fvdsn'><i class='icon-twitter-sign'></i> Twitter</a>
+                <a href='http://www.github.com/fvdsn/cryptolink'><i class='icon-github-sign'></i> GitHub</a>
+            </nav>
+            <section class='page'>
+                    <h3>What's CryptoLink ?</h3>
+                    <p>
+                    CryptoLink allows you to encrypt and share messages, documents, and pictures. 
+                    You just have to type your message, pick a password, and cryptolink will give you a link containing
+                    your now protected data. 
+                    </p><p>
+                    You can then send this link by email, Facebook, 
+                    Twitter, etc. Your recipients then click the link and provide the
+                    password. For those without the password reading your message is however impossible.
+                    And by impossible I mean even for the most ressourceful organisations.
+                    </p><p>
+                    Or you could save the link in your favorites &mdash; so you can easily access it later &mdash; 
+                    and protect its content from phone or laptop thiefs. Or you could 
+                    print the generated QR-Code, and store valuable information in your wallet or paper documents. 
+                    </p><p>
+                    And the best part is that Cryptolink doesn't host or know anything about your messages. 
+                    This means I can let you do whatever you want with CryptoLink. And you can rest
+                    assured that as long as you have the link, you have your data.
+                    <h3>How secure is CryptoLink?</h3>
+                    <p>
+                    The data is encrypted with AES, one of the most secure encryption algorithm available. 
+                    But for the encryption to be effective you need to provide a good password, so it is very
+                    important to follow the recommandations of the built-in password checker.
+                    </p>
+                    <p>
+                    
+                    </p>
+                    <!--<div class='centered'>
+                        <span class='textbutton' id='#paypal'>PayPal</span>
+                        <span class='textbutton' id='#bitcoin' >Bitcoin</span>
+                    </div>
+                    -->
+            </section>
+            <nav class='page links'>
+                <a href='http://frederic.vanderessen.com'><i class='icon-rss'></i> Blog</a>
+                <a href='http://twitter.com/fvdsn'><i class='icon-twitter-sign'></i> Twitter</a>
+                <a href='http://www.github.com/fvdsn/cryptolink'><i class='icon-github-sign'></i> GitHub</a>
+            </nav>
+            <footer class='page footer'>
+                MIT Licensed by <a href='http://frederic.vanderessen.com'>Frédéric van der Essen</a>
+            </footer>
+        </article>
+        <script src="js/vendor/ace/ace.js"></script>
+        <script src="js/vendor/ZeroClipboard.min.js"></script>
+        <script src="js/cryptolink.gui.bundle.js"></script>
+    </body>
+</html>
